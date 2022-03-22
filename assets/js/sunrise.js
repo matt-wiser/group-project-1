@@ -1,5 +1,6 @@
-fetch('https://api.sunrise-sunset.org/json.')
-    .then(function(response) {
+fetch('https://api.sunrise-sunset.org/json.', {
+    mode: 'no-cors'
+    }).then(function(response) {
         return response.json();
     }).then(function(data) {
         console.log(data);
