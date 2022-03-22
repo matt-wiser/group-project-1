@@ -12,8 +12,8 @@ Create a responsive website with calls to at least 2 APIs that uses persistent l
 Coming Soon
 
 ## Contribution
-Anthony Crite
-Dakota Straub
-Chris Warren
-Matthew Wiser
+* Anthony Crite
+* Dakota Straub
+* Chris Warren
+* Matthew Wiser
 
