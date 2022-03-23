@@ -1,4 +1,4 @@
-var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA&stateCode=TN'
+var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA'
 
 function getFormData(){
     var selectedState = document.getElementById('state-select');
@@ -23,7 +23,7 @@ function getFormData(){
 }
 
 function constructQueryUrl(searchData){
-    var queryUrl = npsUrl + '&' + searchData.selectedState;
+    var queryUrl = npsUrl + '&stateCode=' + searchData.selectedState;
     return queryUrl;
 }
 
