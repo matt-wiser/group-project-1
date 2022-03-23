@@ -19,6 +19,7 @@ function getFormData(){
         city: city,
         zipCode: zipCode,
     }
+    console.log(searchData);
     submitRequest(searchData);
 }
 
@@ -36,8 +37,13 @@ function submitRequest(searchData){
         return response;
     })
     .then(function(response){
+        updateView(response.data);
         console.log(response.data);
     })
+}
+
+function updateView(npsData){
+
 }
 
 $('#submitaddress').click(getFormData);
