@@ -1,14 +1,43 @@
-var npsKey = 'Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA';
-var queryUrl = 'https://developer.nps.gov/api/v1/parks?stateCode=TN&api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA';
-var npsURL = 'developer.nps.gov/api/v1'
+var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA&stateCode=TN'
 
+function getFormData(){
+    var selectedState = document.getElementById('state-select');
+    selectedState = selectedState.value;
 
+    var streetAddress = document.getElementById('address');
+    streetAddress = streetAddress.value;
 
-fetch(queryUrl)
-.then(function(response){
-    response = response.json();
-    return response;
-})
-.then(function(response){
-    console.log(response.data);
-})
+    var city = document.getElementById('city');
+    city = city.value;
+
+    var zipCode = document.getElementById('zip');
+    zipCode = zipCode.value;
+
+    var searchData = {
+        selectedState: selectedState,
+        streetAddress: streetAddress,
+        city: city,
+        zipCode: zipCode,
+    }
+    submitRequest(searchData);
+}
+
+function constructQueryUrl(searchData){
+    var queryUrl = npsUrl + '&' + searchData.selectedState;
+    return queryUrl;
+}
+
+function submitRequest(searchData){
+    var queryUrl = constructQueryUrl(searchData);
+    
+    fetch(queryUrl)
+    .then(function(response){
+        response = response.json();
+        return response;
+    })
+    .then(function(response){
+        console.log(response.data);
+    })
+}
+
+$('#submitaddress').click(getFormData);
