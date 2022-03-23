@@ -36,7 +36,7 @@
     padding: 20px 30px 200px;
     background-size: 100%;
     background-position: center;
-    background-image: url(/assets/images/trees.jpg);
+    background-image: url(../images/trees.jpg);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
