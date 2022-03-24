@@ -1,7 +1,7 @@
 //var npsKey = config.npsKey;
 //var queryUrl = config.queryUrl;
 var npsURL = 'developer.nps.gov/api/v1'
-var gMapsURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDqnsrJI6glSMm-yvEVcj5bOFO5zK-RsYo&callback=initMap&v=weekly"
+var gMapsURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDqnsrJI6glSMm-yvEVcj5bOFO5zK-RsYo&callback=initMap&v=weekly";
 
 // fetch(queryUrl)
 // .then(function(response){
