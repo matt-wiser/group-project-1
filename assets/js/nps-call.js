@@ -43,7 +43,6 @@ function submitRequest(searchData){
     })
 }
 
-let 
 function latLongcalc(parkData) {
     var lat = parkData[0].latitude;
     var long = parkData[0].longitude;
