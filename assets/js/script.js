@@ -1,22 +1,61 @@
-//var npsKey = config.npsKey;
-//var queryUrl = config.queryUrl;
-var npsURL = 'developer.nps.gov/api/v1'
-var gMapsURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDqnsrJI6glSMm-yvEVcj5bOFO5zK-RsYo&callback=initMap&v=weekly";
+var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA'
 
-// fetch(queryUrl)
-// .then(function(response){
-//     response = response.json();
-//     return response;
-// })
-// .then(function(response){
-//     console.log(response.data);
-// })
+function getFormData(){
+    var selectedState = document.getElementById('state-select');
+    selectedState = selectedState.value;
 
-fetch (gMapsURL)
-.then(function(response) {
-    response = response.json();
-    return response;
-})
-.then(function(response) {
-    console.log(response.data);
-})
+    var streetAddress = document.getElementById('address');
+    streetAddress = streetAddress.value;
+
+    var city = document.getElementById('city');
+    city = city.value;
+
+    var zipCode = document.getElementById('zip');
+    zipCode = zipCode.value;
+
+    var searchData = {
+        selectedState: selectedState,
+        streetAddress: streetAddress,
+        city: city,
+        zipCode: zipCode,
+    }
+    console.log(searchData);
+    submitRequest(searchData);
+}
+
+function constructQueryUrl(searchData){
+    var queryUrl = npsUrl + '&stateCode=' + searchData.selectedState;
+    return queryUrl;
+}
+
+function submitRequest(searchData){
+    var queryUrl = constructQueryUrl(searchData);
+    
+    fetch(queryUrl)
+    .then(function(response){
+        response = response.json();
+        return response;
+    })
+    .then(function(response){
+        updateView(response.data);
+        latLongcalc(response.data);
+        console.log(response.data);
+    })
+}
+function latLongcalc(parkData) {
+    var lat = parkData[0].latitude;
+    var long = parkData[0].longitude;
+    fetch("https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + long)
+    .then(function(response){
+        response = response.json();
+        return response;
+    }).then(function(response){
+        console.log(response);
+    })
+}
+
+function updateView(npsData){
+
+}
+
+$('#submitaddress').click(getFormData);
