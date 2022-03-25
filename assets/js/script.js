@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var npsKey = config.npsKey;
 var queryUrl = config.queryUrl;
 var npsURL = 'developer.nps.gov/api/v1';
@@ -102,7 +101,6 @@ var map = new H.Map(
         function(error) {
             alert(error.message)
         }); 
-=======
 // var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA'
 
 // function getFormData(){
@@ -164,4 +162,3 @@ var map = new H.Map(
 // }
 
 // $('#submitaddress').click(getFormData);
->>>>>>> 6a7adfb05f6af9a86ab453dd3238201ca5de61d9
