@@ -9,30 +9,8 @@
     <title>Group Project 1</title>
 </head>
 <body>
-  <!-- <div class="hero small-6 medium-4 large-1 columns" id="hero">
-    <h2>National Park Selector</h2>
-    <div>
-    <p class="announce">Start your adventure here!</p>
-    <p class="info">Enter the state you'd like to visit and your address below. We'll do the rest!</p>
-    </div>
-    <div class="dropdown">
-    <button class="dropbtn">State</button>
-    <div class="statedrop">
-      <a href="#">AL</a><br><a href="#">AK</a><br><a href="#">AZ</a><br><a href="#">AR</a><br><a href="#">CA</a><br>
-      <a href="#">CO</a><br><a href="#">CT</a><br><a href="#">DE</a><br><a href="#">FL</a><br><a href="#">GA</a><br>
-      <a href="#">HI</a><br><a href="#">ID</a><br><a href="#">IL</a><br><a href="#">IN</a><br><a href="#">IA</a><br>
-      <a href="#">KS</a><br><a href="#">KY</a><br><a href="#">LA</a><br><a href="#">ME</a><br><a href="#">MD</a><br>
-      <a href="#">MA</a><br><a href="#">MI</a><br><a href="#">MN</a><br><a href="#">MS</a><br><a href="#">MO</a><br>
-      <a href="#">MT</a><br><a href="#">NE</a><br><a href="#">NV</a><br><a href="#">NH</a><br><a href="#">NJ</a><br>
-      <a href="#">NM</a><br><a href="#">NY</a><br><a href="#">NC</a><br><a href="#">ND</a><br><a href="#">OH</a><br>
-      <a href="#">OK</a><br><a href="#">OR</a><br><a href="#">PA</a><br><a href="#">RI</a><br><a href="#">SC</a><br>
-      <a href="#">SD</a><br><a href="#">TN</a><br><a href="#">TX</a><br><a href="#">UT</a><br><a href="#">VT</a><br>
-      <a href="#">VA</a><br><a href="#">WA</a><br><a href="#">WV</a><br><a href="#">WI</a><br><a href="#">WY</a>
-    </div>
-    </div>
-  </div>
- </div> -->
-
+    <div id="content-container">
+ 
     <section class="hero-section">
         <div class="hero-section-text">
             <h2>National Park Selector</h2>
@@ -41,8 +19,8 @@
         </div>
     </section>
 
-    <section class="grid-x grid-margin-x grid-padding-x">
-        <div class="cell small-12 large-6">
+    <section class="grid-x grid-margin-x grid-padding-x" id="main-content">
+        <div class="cell small-12 large-6" id="text">
             <h3>Lorem Ipsum Dolor Sit Amet!</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
@@ -111,13 +89,51 @@
                   <option value="WY">Wyoming</option>
                 </select>
               </form>
-              <a class="button" id="submitaddress">Submit Your Address</a>
+              <a class="button" id="submitaddress" href="#">Submit Your Address</a>
         </div>
     </section>
+    </div>
     
+    <section class="grid-x grid-margin-x grid-padding-x hide" id="filters-results">
+        <div class="cell">
+            <ul class="accordion" data-accordion data-allow-all-closed="true">
+                <li class="accordion-item" data-accordion-item>
+                    <!-- Accordion tab title -->
+                    <a href="#" class="accordion-title">Filters</a>
+                
+                    <!-- Accordion tab content -->
+                    <div class="accordion-content" data-tab-content>                        
+                        <form id="entrance-fees">
+                            <label for="entrance-fees">Entrance Fees</label>
+                            <select name="entrance-fees" id="fees-select">
+                                <option value="all">All</option>
+                                <option value="free">Free</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </form>
+
+                        <fieldset class="fieldset">
+                            <legend>Activities</legend>
+                            <input id="hiking" type="checkbox"><label for="hiking">Hiking</label>
+                            <input id="hunting" type="checkbox"><label for="hunting">Hunting</label>
+                            <input id="fishing" type="checkbox"><label for="fishing">Fishing</label>
+                        </fieldset>
+
+                        <fieldset class="fieldset">
+                            <legend>Topics</legend>
+                            <input id="scenic-views" type="checkbox"><label for="scenic-views">Scenic Views</label>
+                            <input id="archaeology" type="checkbox"><label for="archaeology">Archaeology</label>
+                            <input id="birds" type="checkbox"><label for="birds">Birds</label>
+                            <input id="animals" type="checkbox"><label for="animals">Animals</label>
+                        </fieldset>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/js/foundation.min.js" crossorigin="anonymous"></script>
-    <script src="./assets/js/config.js"></script>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/nps-call.js"></script>
 </body>

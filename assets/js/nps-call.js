@@ -1,4 +1,5 @@
 var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA'
+$(document).foundation();
 
 function getFormData(){
     var selectedState = document.getElementById('state-select');
@@ -42,6 +43,25 @@ function submitRequest(searchData){
         console.log(response.data);
     })
 }
+
+
+function updateView(npsData){
+    var mainContentEl = document.getElementById('content-container');
+    removeAllChildNodes(mainContentEl);
+    
+    var filtersEl = document.getElementById('filters-results');
+    filtersEl.classList.remove('hide');
+    
+    // $(mainContentEl).load('./results.html');
+}
+
+function removeAllChildNodes(parent) {
+    console.log('attempting to remove child nodes');
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 function latLongcalc(parkData) {
     var lat = parkData[0].latitude;
     var long = parkData[0].longitude;
@@ -52,10 +72,6 @@ function latLongcalc(parkData) {
     }).then(function(response){
         console.log(response);
     })
-}
-
-function updateView(npsData){
-
 }
 
 $('#submitaddress').click(getFormData);
