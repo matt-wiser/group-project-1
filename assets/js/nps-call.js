@@ -38,7 +38,19 @@ function submitRequest(searchData){
     })
     .then(function(response){
         updateView(response.data);
+        latLongcalc(response.data);
         console.log(response.data);
+    })
+}
+function latLongcalc(parkData) {
+    var lat = parkData[0].latitude;
+    var long = parkData[0].longitude;
+    fetch("https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + long)
+    .then(function(response){
+        response = response.json();
+        return response;
+    }).then(function(response){
+        console.log(response);
     })
 }
 
