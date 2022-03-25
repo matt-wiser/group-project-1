@@ -1,64 +1,18 @@
-.dropbtn {
-    background-color:chocolate;
-    color: white;
-    padding: 15px;
-    font-size: 16px;
-    border: none;
-}
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-.statedrop {
-    display: none;
-    position: absolute;
-    background-color: blanchedalmond;
-    min-width: 20px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.statedropdown a {
-    color:blueviolet;
-    padding: 12px;
-    text-decoration: none;
-    display: block;
-}
-
-.statedrop a:hover {
-    background-color:aqua;
-}
-.dropdown:hover .statedrop {display:block;}
-
-.dropdownhover .dropbtn {background-color: blue;}
-
-.hero {
-    padding: 20px 30px 200px;
-    background-size: 100%;
-    background-position: center;
-    background-image: url(../images/trees.jpg);
+.hero-section {
+    background: url(../images/trees.jpg) 50% no-repeat;
+    background-size: cover;
+    height: 60vh;
+    text-align: center;
     display: flex;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    align-items:flex-end;
+}
+
+.hero-section .hero-section-text {
     color: white;
-    justify-content: space-between;
-}
-.announce {
-    margin: 30px;
-    font-size: 45px;
+    text-shadow: 1px 1px 2px black;
 }
 
-.info {
-    margin: 30px;
-    font-size:25px;
-}
-
-.address {
-    width: 50%;
-    padding: 20px;
-}
-
-.button {
-    margin: 15px;
+label {
+    margin-bottom: 10px;
 }
