@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
+        type="text/javascript" charset="utf-8"></script>
+      <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
+        type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Group Project 1</title>
+    <title>Natinal Park Finder</title>
 </head>
 <body>
   <div class="hero small-6 medium-4 large-1 columns" id="hero">
@@ -15,21 +19,7 @@
     <p class="announce">Start your adventure here!</p>
     <p class="info">Enter the state you'd like to visit and your address below. We'll do the rest!</p>
     </div>
-    <!-- <div class="dropdown">
-    <button class="dropbtn">State</button>
-    <div class="statedrop">
-      <a href="#">AL</a><br><a href="#">AK</a><br><a href="#">AZ</a><br><a href="#">AR</a><br><a href="#">CA</a><br>
-      <a href="#">CO</a><br><a href="#">CT</a><br><a href="#">DE</a><br><a href="#">FL</a><br><a href="#">GA</a><br>
-      <a href="#">HI</a><br><a href="#">ID</a><br><a href="#">IL</a><br><a href="#">IN</a><br><a href="#">IA</a><br>
-      <a href="#">KS</a><br><a href="#">KY</a><br><a href="#">LA</a><br><a href="#">ME</a><br><a href="#">MD</a><br>
-      <a href="#">MA</a><br><a href="#">MI</a><br><a href="#">MN</a><br><a href="#">MS</a><br><a href="#">MO</a><br>
-      <a href="#">MT</a><br><a href="#">NE</a><br><a href="#">NV</a><br><a href="#">NH</a><br><a href="#">NJ</a><br>
-      <a href="#">NM</a><br><a href="#">NY</a><br><a href="#">NC</a><br><a href="#">ND</a><br><a href="#">OH</a><br>
-      <a href="#">OK</a><br><a href="#">OR</a><br><a href="#">PA</a><br><a href="#">RI</a><br><a href="#">SC</a><br>
-      <a href="#">SD</a><br><a href="#">TN</a><br><a href="#">TX</a><br><a href="#">UT</a><br><a href="#">VT</a><br>
-      <a href="#">VA</a><br><a href="#">WA</a><br><a href="#">WV</a><br><a href="#">WI</a><br><a href="#">WY</a>
-    </div>
-    </div> -->
+   
   </div>
     <form class="address">
       <label for="street">Street Address</label><br>
@@ -99,6 +89,7 @@
 
 
   </div>
+  <div style="width: 640px; height: 480px" id="mapContainer"></div>
 
     <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
