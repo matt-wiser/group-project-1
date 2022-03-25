@@ -1,4 +1,11 @@
 var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA'
+var sunriseUrl = "https://api.sunrise-sunset.org/json?lat=&lng="
+
+// fetch(sunriseUrl)
+// .then((response) => response.json())
+// .then((data) => {
+//     console.log(results[sunrise])
+// })
 
 function getFormData(){
     var selectedState = document.getElementById('state-select');
