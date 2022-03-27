@@ -24,15 +24,18 @@ function getFormData(){
 //     window.localStorage.setItem('recently viewed', JSON.stringify(searchData));
 // 
     function createItem() {
-        localStorage.setItem('recentlySearched', JSON.stringify(searchData));
+        localStorage.setItem('recentlySearched', JSON.stringify(searchData.selectedState));
+    
     }
-    createItem()
+    
+    // createItem()
 
-    function getValue() {
-        return localStorage.getItem('recentlySearched');
-    }
-    console.log(getValue());
+    // function getValue() {
+    //     return localStorage.getItem('recentlySearched');
+    // }
+    // console.log(getValue());
 }
+
 
 function constructQueryUrl(searchData){
     var queryUrl = npsUrl + '&stateCode=' + searchData.selectedState;
