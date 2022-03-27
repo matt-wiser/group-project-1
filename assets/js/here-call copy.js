@@ -110,7 +110,7 @@ router.calculateRoute(routingParameters, onResult,
         alert(error.message)
     });
  // Enable the event system on the map instance:
- var mapEvents = new H.mapevents.MapEvents(mapInstance);
+ var mapEvents = new H.mapevents.MapEvents(map);
 
  // Add event listeners:
  map.addEventListener('tap', function(evt) {

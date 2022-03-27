@@ -16,3 +16,7 @@
 label {
     margin-bottom: 10px;
 }
+#mapContainer,
+#panel {
+    margin: 15px;
+}

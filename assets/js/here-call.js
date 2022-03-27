@@ -55,8 +55,8 @@ function calculateRouteFromAtoB(platform) {
           transportMode: 'car',
           metricSystem: "imperial",
           language: "en-us",
-          origin: "35.89063,-86.39635", // Brandenburg Gate
-          destination: "36.31837,-86.63381", // Friedrichstraße Railway Station
+          origin: "35.89063,-86.39635", // My House
+          destination: "36.31837,-86.63381", // My Old House
           
           return: 'polyline,turnByTurnActions,actions,instructions,travelSummary'
         };
