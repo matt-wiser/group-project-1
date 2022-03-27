@@ -28,12 +28,12 @@ function getFormData(){
     
     }
     
-    // createItem()
+     createItem()
 
-    // function getValue() {
-    //     return localStorage.getItem('recentlySearched');
-    // }
-    // console.log(getValue());
+    function getValue() {
+        return localStorage.getItem('recentlySearched');
+    }
+    console.log(getValue());
 }
 
 
