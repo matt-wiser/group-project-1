@@ -71,6 +71,10 @@ function latLongcalc(parkData) {
 // const lsDisplay = document.getElementById("lsDisplay");
 // const submitAddress = document.getElementById("submitAddress");
 
+// stateSelect.addEventListener('select', recent => {
+//     lsDisplay.textContent = recent.target.value
+// })
+
 
 
 function updateView(npsData){
