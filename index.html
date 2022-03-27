@@ -4,24 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
-        type="text/javascript" charset="utf-8"></script>
-      <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
-        type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Natinal Park Finder</title>
+    <title>National Park Finder</title>
 </head>
 <body>
-  <!-- <div class="hero small-6 medium-4 large-1 columns" id="hero">
-    <h2>National Park Selector</h2>
-    <div>
-    <p class="announce">Start your adventure here!</p>
-    <p class="info">Enter the state you'd like to visit and your address below. We'll do the rest!</p>
-    </div>
-   
-  </div>
- </div> -->
 
     <section class="hero-section">
         <div class="hero-section-text">
@@ -33,6 +24,9 @@
 
   </div>
   <div style="width: 640px; height: 480px" id="mapContainer"></div>
+  <div style="width: 640px; height: 100px" id="panel"></div>
+  
+  
 
     <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -114,8 +108,8 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/js/foundation.min.js" crossorigin="anonymous"></script>
-    <script src="./assets/js/config.js"></script>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/nps-call.js"></script>
+    <script src="./assets/js/here-call.js"></script>
 </body>
 </html>
