@@ -48,7 +48,7 @@
                 <input type="text" id="zip">
                 
                 <label for="states">Please Select a State You'd Like to Explore</label>
-                <select name="states" id="state-select">
+                <select name="states" id="stateSelect">
                   <option value="">Please Choose a State</option>
                   <option value="AL">Alabama</option>
                   <option value="AK">Alaska</option>
@@ -102,8 +102,14 @@
                   <option value="WY">Wyoming</option>
                 </select>
               </form>
-              <a class="button" id="submitaddress">Submit Your Address</a>
-        </div>
+              <a class="button" id="submitAddress">Submit Your Address</a>
+              
+              <section id="lsDisplay">
+                <legend>Recent searches</legend>
+                <div id="lsDisplay"></div>
+              </section>
+              
+            </div>
     </section>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -112,4 +118,12 @@
     <script src="./assets/js/nps-call.js"></script>
     <script src="./assets/js/here-call.js"></script>
 </body>
+<!-- <script type="text/javascript">
+  const stateSelect = document.getElementById("stateSelect");
+  const lsDisplay = document.getElementById("lsDisplay");
+  const submitAddress = document.getElementById("submitAddress");
+
+  
+</script> -->
+
 </html>

@@ -1,7 +1,7 @@
 var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA'
-
+ 
 function getFormData(){
-    var selectedState = document.getElementById('state-select');
+    var selectedState = document.getElementById('stateSelect');
     selectedState = selectedState.value;
 
     var streetAddress = document.getElementById('address');
@@ -21,6 +21,7 @@ function getFormData(){
     }
     console.log(searchData);
     submitRequest(searchData);
+    window.localStorage.setItem('recently viewed', JSON.stringify(searchData));
 }
 
 function constructQueryUrl(searchData){
@@ -53,9 +54,14 @@ function latLongcalc(parkData) {
         console.log(response);
     })
 }
+// const stateSelect = document.getElementById("stateSelect");
+// const lsDisplay = document.getElementById("lsDisplay");
+// const submitAddress = document.getElementById("submitAddress");
+
+
 
 function updateView(npsData){
 
 }
 
-$('#submitaddress').click(getFormData);
+$('#submitAddress').click(getFormData);
