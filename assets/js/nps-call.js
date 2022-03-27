@@ -21,7 +21,17 @@ function getFormData(){
     }
     console.log(searchData);
     submitRequest(searchData);
-    window.localStorage.setItem('recently viewed', JSON.stringify(searchData));
+//     window.localStorage.setItem('recently viewed', JSON.stringify(searchData));
+// 
+    function createItem() {
+        localStorage.setItem('recentlySearched', JSON.stringify(searchData));
+    }
+    createItem()
+
+    function getValue() {
+        return localStorage.getItem('recentlySearched');
+    }
+    console.log(getValue());
 }
 
 function constructQueryUrl(searchData){
