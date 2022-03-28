@@ -1,5 +1,8 @@
 var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA'
-<<<<<<< HEAD
+//<<<<<<< HEAD
+//<<<<<<< HEAD
+var sunriseUrl = "https://api.sunrise-sunset.org/json?lat=&lng="
+//=======
 var sunriseUrl = "https://api.sunrise-sunset.org/json?lat=&lng="
 
 // fetch(sunriseUrl)
@@ -7,10 +10,17 @@ var sunriseUrl = "https://api.sunrise-sunset.org/json?lat=&lng="
 // .then((data) => {
 //     console.log(results[sunrise])
 // })
+//>>>>>>> e3083f6b473595700e85f315c16c32c5aa15a043
 
-=======
+// fetch(sunriseUrl)
+// .then((response) => response.json())
+// .then((data) => {
+//     console.log(results[sunrise])
+// })
+
+//=======
  
->>>>>>> develop
+//>>>>>>> develop
 function getFormData(){
     var selectedState = document.getElementById('stateSelect');
     selectedState = selectedState.value;
