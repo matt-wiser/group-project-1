@@ -100,6 +100,10 @@ function constructParkCards(parkData){
             cardContainerEl.setAttribute("data-topic" + "-" + [x], parkData[i].topics[x].name);
         }
 
+        for (let y = 0; y < parkData[i].activities.length; y++) {            
+            cardContainerEl.setAttribute("data-activity" + "-" + [y], parkData[i].activities[y].name);
+        }
+
         cardEl.append(cardContainerEl);
         resultsEl.append(cardCellEl);
     }
