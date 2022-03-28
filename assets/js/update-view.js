@@ -96,6 +96,10 @@ function constructParkCards(parkData){
         parkUrl.textContent = "Official Website";
         cardContainerEl.append(parkUrl);
 
+        for (let x = 0; x < parkData[i].topics.length; x++) {            
+            cardContainerEl.setAttribute("data-topic" + "-" + [x], parkData[i].topics[x].name);
+        }
+
         cardEl.append(cardContainerEl);
         resultsEl.append(cardCellEl);
     }
