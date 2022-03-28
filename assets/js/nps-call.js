@@ -1,4 +1,5 @@
 var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA'
+<<<<<<< HEAD
 var sunriseUrl = "https://api.sunrise-sunset.org/json?lat=&lng="
 
 // fetch(sunriseUrl)
@@ -7,8 +8,11 @@ var sunriseUrl = "https://api.sunrise-sunset.org/json?lat=&lng="
 //     console.log(results[sunrise])
 // })
 
+=======
+ 
+>>>>>>> develop
 function getFormData(){
-    var selectedState = document.getElementById('state-select');
+    var selectedState = document.getElementById('stateSelect');
     selectedState = selectedState.value;
 
     var streetAddress = document.getElementById('address');
@@ -28,7 +32,21 @@ function getFormData(){
     }
     console.log(searchData);
     submitRequest(searchData);
+//     window.localStorage.setItem('recently viewed', JSON.stringify(searchData));
+// 
+    function createItem() {
+        localStorage.setItem('recentlySearched', JSON.stringify(searchData.selectedState));
+    
+    }
+    
+     createItem()
+
+    function getValue() {
+        return localStorage.getItem('recentlySearched');
+    }
+    console.log(getValue());
 }
+
 
 function constructQueryUrl(searchData){
     var queryUrl = npsUrl + '&stateCode=' + searchData.selectedState;
@@ -61,9 +79,18 @@ function latLongcalc(parkData) {
         console.log(response);
     })
 }
+// const stateSelect = document.getElementById("stateSelect");
+// const lsDisplay = document.getElementById("lsDisplay");
+// const submitAddress = document.getElementById("submitAddress");
+
+// stateSelect.addEventListener('select', recent => {
+//     lsDisplay.textContent = recent.target.value
+// })
+
+
 
 function updateView(npsData){
 
 }
 
-$('#submitaddress').click(getFormData);
+$('#submitAddress').click(getFormData);
