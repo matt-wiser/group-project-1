@@ -1,3 +1,6 @@
+var activitiesArray = [];
+var topicsArray = [];
+
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -21,6 +24,51 @@ function updateView(npsData){
     filtersEl.classList.remove('hide');
 
     constructParkCards(npsData);
+}
+
+function poplateTopics(array){
+    array = [...new Set(array)];
+    
+    var topicContainerEl = document.getElementById("topics-field");
+
+    for (let i = 0; i < array.length; i++) {
+        var checkboxLabelEl = document.createElement("label");
+        checkboxLabelEl.setAttribute("for", "checkbox-topic-" + i);
+        checkboxLabelEl.textContent = array[i];
+
+        var checkboxEl = document.createElement("input");
+        checkboxEl.setAttribute("type", "checkbox");
+        checkboxEl.setAttribute("id", "checkbox-topic-" + i);
+        
+        var breakEl = document.createElement("br");
+
+        topicContainerEl.append(checkboxEl);
+        topicContainerEl.append(checkboxLabelEl);
+        topicContainerEl.append(breakEl);
+        
+    }
+}
+
+function populateActivities(array){
+    array = [...new Set(array)];
+    
+    var activityContainerEl = document.getElementById("activities-field");
+
+    for (let i = 0; i < array.length; i++) {
+        var checkboxLabelEl = document.createElement("label");
+        checkboxLabelEl.setAttribute("for", "checkbox-activity-" + i);
+        checkboxLabelEl.textContent = array[i];
+
+        var checkboxEl = document.createElement("input");
+        checkboxEl.setAttribute("type", "checkbox");
+        checkboxEl.setAttribute("id", "checkbox-activity-" + i);
+        
+        var breakEl = document.createElement("br");
+
+        activityContainerEl.append(checkboxEl);
+        activityContainerEl.append(checkboxLabelEl);
+        activityContainerEl.append(breakEl);
+    }
 }
 
 function constructParkCards(parkData){
@@ -98,13 +146,16 @@ function constructParkCards(parkData){
 
         for (let x = 0; x < parkData[i].topics.length; x++) {            
             cardContainerEl.setAttribute("data-topic" + "-" + [x], parkData[i].topics[x].name);
+            topicsArray.push(parkData[i].topics[x].name);
         }
 
         for (let y = 0; y < parkData[i].activities.length; y++) {            
             cardContainerEl.setAttribute("data-activity" + "-" + [y], parkData[i].activities[y].name);
+            activitiesArray.push(parkData[i].activities[y].name);
         }
-
         cardEl.append(cardContainerEl);
         resultsEl.append(cardCellEl);
     }
+    populateActivities(activitiesArray);
+    poplateTopics(topicsArray);
 }
