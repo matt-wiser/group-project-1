@@ -110,7 +110,7 @@ function calculateRouteFromAtoB(platform) {
   routeInstructionsContainer = document.getElementById('panel');
   
   // initialize communication with the platform
-  // In your own code, replace variable window.apikey with your own apikey
+ 
   var platform = new H.service.Platform({
       'apiKey': "aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok"
   });
