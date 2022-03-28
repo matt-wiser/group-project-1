@@ -9,3 +9,4 @@ User should be able to view the details of present date's sunrise/sunset in cons
 User should be able to view their own recently selected states in console due to local storage.
 
 
+![Recording 2022-03-27 at 17 00 12](https://user-images.githubusercontent.com/99000478/160307592-c336a6ac-d8a9-40cf-92cd-1be690d663fe.gif)
