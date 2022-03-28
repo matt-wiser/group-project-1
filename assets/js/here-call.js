@@ -25,7 +25,7 @@ function getLatLonAddress(addData) {
     //find latitude and logitude from address information
     var hereLatLonUrl = `https://geocode.search.hereapi.com/v1/geocode?apiKey=${hereKey}&q=${addData.homeStAdd}+${addData.homeCity}+${addData.homeZip}`;
     console.log(hereLatLonUrl);
-    fetch(hereLatLonUrl)
+    return fetch(hereLatLonUrl)
         .then(function (response) {
             if (response.ok) {
                 return response.json()
@@ -49,13 +49,16 @@ function getLatLonAddress(addData) {
 
 
 function calculateRouteFromAtoB(platform) {
+  var homeLat = platform.homeLat;
+  console.log('homeLat: ', homeLat);
+  var homeLon = platform.homeLon;
     var router = platform.getRoutingService(null, 8),
         routeRequestParams = {
           routingMode: 'fast',
           transportMode: 'car',
           metricSystem: "imperial",
           language: "en-us",
-          origin: "35.89063,-86.39635", // My House
+          origin: "35.890300,-86.395500", // My House
           destination: "36.31837,-86.63381", // My Old House
           
           return: 'polyline,turnByTurnActions,actions,instructions,travelSummary'
@@ -83,9 +86,9 @@ function calculateRouteFromAtoB(platform) {
      * in the functions below:
      */
     addRouteShapeToMap(route);
-    addManueversToMap(route);
+   // addManueversToMap(route);
     addWaypointsToPanel(route);
-    //addManueversToPanel(route);
+    addManueversToPanel(route);
     addSummaryToPanel(route);
     // ... etc.
   }
@@ -98,65 +101,68 @@ function calculateRouteFromAtoB(platform) {
     alert('Can\'t reach the remote server');
   }
   
-  /**
-   * Boilerplate map initialization code starts below:
-   */
+  
+   //* map initialization code starts below:
+   
   
   // set up containers for the map + panel
   var mapContainer = document.getElementById('mapContainer'),
-    routeInstructionsContainer = document.getElementById('panel');
+  routeInstructionsContainer = document.getElementById('panel');
   
-  // Step 1: initialize communication with the platform
+  // initialize communication with the platform
   // In your own code, replace variable window.apikey with your own apikey
   var platform = new H.service.Platform({
       'apiKey': "aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok"
   });
   
+  //This keeps initial map from being created!!!!!
   var defaultLayers = platform.createDefaultLayers();
   
-  // Step 2: initialize a map - this map is centered over Berlin
+  // initialize a map - this map is centered over Tennessee
+  //this creates the initial map!!!!!
   var map = new H.Map(mapContainer,
     defaultLayers.vector.normal.map, {
-    center: {lat: 52.5160, lng: 13.3779},
-    zoom: 13,
+    center: {lat: 35.89, lng: -86.39},
+    zoom: 8,
     pixelRatio: window.devicePixelRatio || 1
   });
+
   
   // add a resize listener to make sure that the map occupies the whole container
   window.addEventListener('resize', () => map.getViewPort().resize());
   
-  // Step 3: make the map interactive
+  // make the map interactive
   // MapEvents enables the event system
   // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
   var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
-
+  
   
   // Create the default UI components
   var ui = H.ui.UI.createDefault(map, defaultLayers);
 
  
-  // Hold a reference to any infobubble opened
-  var bubble;
+  // // Hold a reference to any infobubble opened
+  // var bubble;
   
-  /**
-   * Opens/Closes a infobubble
-   * @param {H.geo.Point} position The location on the map.
-   * @param {String} text          The contents of the infobubble.
-   */
-  function openBubble(position, text) {
-    if (!bubble) {
-      bubble = new H.ui.InfoBubble(
-        position,
-        // The FO property holds the province name.
-        {content: text});
-      ui.addBubble(bubble);
-    } else {
-      bubble.setPosition(position);
-      bubble.setContent(text);
-      bubble.open();
-    }
-  }
+  // /**
+  //  * Opens/Closes a infobubble
+  //  * @param {H.geo.Point} position The location on the map.
+  //  * @param {String} text          The contents of the infobubble.
+  //  */
+  // function openBubble(position, text) {
+  //   if (!bubble) {
+  //     bubble = new H.ui.InfoBubble(
+  //       position,
+  //       // The FO property holds the province name.
+  //       {content: text});
+  //     ui.addBubble(bubble);
+  //   } else {
+  //     bubble.setPosition(position);
+  //     bubble.setContent(text);
+  //     bubble.open();
+  //   }
+  // }
   
   /**
    * Creates a H.map.Polyline from the shape of the route and adds it to the map.
@@ -184,45 +190,45 @@ function calculateRouteFromAtoB(platform) {
     });
   }
   
-  /**
-   * Creates a series of H.map.Marker points from the route and adds them to the map.
-   * @param {Object} route A route as received from the H.service.RoutingService
-   */
-  function addManueversToMap(route) {
-    var svgMarkup = '<svg width="18" height="18" ' +
-      'xmlns="http://www.w3.org/2000/svg">' +
-      '<circle cx="8" cy="8" r="8" ' +
-        'fill="#1b468d" stroke="white" stroke-width="1" />' +
-      '</svg>',
-      dotIcon = new H.map.Icon(svgMarkup, {anchor: {x:8, y:8}}),
-      group = new H.map.Group(),
-      i,
-      j;
+  // // /**
+  // //  * Creates a series of H.map.Marker points from the route and adds them to the map.
+  // //  * @param {Object} route A route as received from the H.service.RoutingService
+  // //  */
+  // // function addManueversToMap(route) {
+  // //   var svgMarkup = '<svg width="18" height="18" ' +
+  // //     'xmlns="http://www.w3.org/2000/svg">' +
+  // //     '<circle cx="8" cy="8" r="8" ' +
+  // //       'fill="#1b468d" stroke="white" stroke-width="1" />' +
+  // //     '</svg>',
+  // //     dotIcon = new H.map.Icon(svgMarkup, {anchor: {x:8, y:8}}),
+  // //     group = new H.map.Group(),
+  // //     i,
+  // //     j;
   
-    route.sections.forEach((section) => {
-      let poly = H.geo.LineString.fromFlexiblePolyline(section.polyline).getLatLngAltArray();
+  //   route.sections.forEach((section) => {
+  //     let poly = H.geo.LineString.fromFlexiblePolyline(section.polyline).getLatLngAltArray();
   
-      let actions = section.actions;
-      // Add a marker for each maneuver
-      for (i = 0; i < actions.length; i += 1) {
-        let action = actions[i];
-        var marker = new H.map.Marker({
-          lat: poly[action.offset * 3],
-          lng: poly[action.offset * 3 + 1]},
-          {icon: dotIcon});
-        marker.instruction = action.instruction;
-        group.addObject(marker);
-      }
+  //     let actions = section.actions;
+  //     // Add a marker for each maneuver
+  //     for (i = 0; i < actions.length; i += 1) {
+  //       let action = actions[i];
+  //       var marker = new H.map.Marker({
+  //         lat: poly[action.offset * 3],
+  //         lng: poly[action.offset * 3 + 1]},
+  //         {icon: dotIcon});
+  //       marker.instruction = action.instruction;
+  //       group.addObject(marker);
+  //     }
   
-      group.addEventListener('tap', function (evt) {
-        map.setCenter(evt.target.getGeometry());
-        openBubble(evt.target.getGeometry(), evt.target.instruction);
-      }, false);
+  //     group.addEventListener('tap', function (evt) {
+  //       map.setCenter(evt.target.getGeometry());
+  //       openBubble(evt.target.getGeometry(), evt.target.instruction);
+  //     }, false);
   
-      // Add the maneuvers group to the map
-      map.addObject(group);
-    });
-  }
+  //     // Add the maneuvers group to the map
+  //     map.addObject(group);
+  //   });
+  // }
   
   /**
    * Creates a series of H.map.Marker points from the route and adds them to the map.
@@ -270,8 +276,8 @@ function calculateRouteFromAtoB(platform) {
   }
   
   /**
-   * Creates a series of H.map.Marker points from the route and adds them to the map.
-   * @param {Object} route A route as received from the H.service.RoutingService
+  //  * Creates a series of H.map.Marker points from the route and adds them to the map.
+  //  * @param {Object} route A route as received from the H.service.RoutingService
    */
   function addManueversToPanel(route) {
     var nodeOL = document.createElement('ol');
@@ -304,5 +310,9 @@ function calculateRouteFromAtoB(platform) {
   }
   
   // Now use the map as required...
+  calculateRouteFromAtoB(platform) 
+   
+   $('#submitaddress').click(getAddData);
 
-   calculateRouteFromAtoB(platform);
+
+ 
