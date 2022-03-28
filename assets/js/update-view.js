@@ -7,6 +7,7 @@ function removeAllChildNodes(parent) {
 function updateView(npsData){
     var heroEl = document.getElementById('hero-section');
     heroEl.style.height = '15vh';
+    heroEl.style.marginBottom = "20px";
 
     var subheads = document.getElementsByClassName('subhead');
     while (subheads[0]) {
@@ -56,8 +57,10 @@ function constructParkCards(parkData){
 
         var operatingHours = document.createElement("ul");
         operatingHours.setAttribute("class", "operating-hours");
-        operatingHours.textContent = "Operating Hours";
-
+        operatingHours.textContent = "Operating Hours ";
+        var breakEl = document.createElement("br");
+        operatingHours.append(breakEl);
+        
         var mondayEl = document.createElement("li");
         mondayEl.textContent = "Monday: " + parkData[i].operatingHours[0].standardHours.monday;
         operatingHours.append(mondayEl);
@@ -81,6 +84,11 @@ function constructParkCards(parkData){
         operatingHours.append(sundayEl);
         cardContainerEl.append(operatingHours);
         
+        var parkUrl = document.createElement("a");
+        parkUrl.setAttribute("href", parkData[i].url);
+        parkUrl.setAttribute("class", "park-link");
+        parkUrl.textContent = "Official Website";
+        cardContainerEl.append(parkUrl);
 
         cardEl.append(cardContainerEl);
         resultsEl.append(cardCellEl);

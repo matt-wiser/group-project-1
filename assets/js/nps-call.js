@@ -40,12 +40,7 @@ function submitRequest(searchData){
     .then(function(response){
         updateView(response.data);
         latLongcalc(response.data);
-        console.log(response.data);
-
-        for (let i = 0; i < response.data.length; i++) {
-            console.log(response.data[i].operatingHours);
-            
-        }    
+        console.log(response.data);  
     })
 }
 

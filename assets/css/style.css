@@ -17,12 +17,17 @@ label {
     margin-bottom: 10px;
 }
 
+.card {
+    padding-bottom: 15px;
+}
+
 .card h5{
     padding: 12px;
 }
 
 .card p{
     padding: 12px;
+    margin-left: 8px;
 }
 
 .center-cropped {
@@ -55,13 +60,15 @@ label {
 .operating-hours{
     list-style: none;
     font-weight: bold;
-}
-
-.operating-hours:nth-child(1){
-    padding-left: 5px;
+    text-decoration: underline;
 }
 
 .operating-hours li {
     display: inline-block;
     margin-right: 5px;
+    text-decoration: none;
+}
+
+.park-link{
+    margin-left: 20px;
 }
