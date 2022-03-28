@@ -17,29 +17,51 @@ label {
     margin-bottom: 10px;
 }
 
+.card h5{
+    padding: 12px;
+}
+
+.card p{
+    padding: 12px;
+}
+
 .center-cropped {
     width: 100%;
     background-position: center center;
     background-repeat: no-repeat;
   }
 
-/* set card width to 100% at small screen size */
+/* set image height to 200px at small screen size */
 @media screen and (max-width: 39.9375em) {
     .card .center-cropped{
         height: 200px;
     }
 }
 
-/* set card width to 50% at medium screen size*/
+/* set image height to 250px at medium screen size*/
 @media screen and (min-width: 40em) and (max-width: 63.9375em) {
     .card .center-cropped{
         height: 250px;
     }   
 }
 
-/* set card width to 33% at large and up screen size */
+/* set image height to 300px at large and up screen size */
 @media screen and (min-width: 64em) {
     .card .center-cropped{
         height: 300px;
     }
+}
+
+.operating-hours{
+    list-style: none;
+    font-weight: bold;
+}
+
+.operating-hours:nth-child(1){
+    padding-left: 5px;
+}
+
+.operating-hours li {
+    display: inline-block;
+    margin-right: 5px;
 }

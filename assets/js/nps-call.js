@@ -41,16 +41,12 @@ function submitRequest(searchData){
         updateView(response.data);
         latLongcalc(response.data);
         console.log(response.data);
-        
+
+        for (let i = 0; i < response.data.length; i++) {
+            console.log(response.data[i].operatingHours);
+            
+        }    
     })
-}
-
-
-
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
 }
 
 function latLongcalc(parkData) {

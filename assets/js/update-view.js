@@ -1,3 +1,9 @@
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 function updateView(npsData){
     var heroEl = document.getElementById('hero-section');
     heroEl.style.height = '15vh';
@@ -39,14 +45,44 @@ function constructParkCards(parkData){
         
         var parkNameEl = document.createElement('h5');
         parkNameEl.textContent = parkData[i].fullName;
-        cardContainerEl.append(parkNameEl);
+        var cardTitleEl = document.createElement('div');
+        cardTitleEl.setAttribute("class", "card-divider");
+        cardTitleEl.append(parkNameEl);
+        cardContainerEl.append(cardTitleEl);
 
         var parkDescriptionEl = document.createElement('p');
         parkDescriptionEl.textContent = parkData[i].description;
         cardContainerEl.append(parkDescriptionEl);
 
-        cardEl.append(cardContainerEl);
+        var operatingHours = document.createElement("ul");
+        operatingHours.setAttribute("class", "operating-hours");
+        operatingHours.textContent = "Operating Hours";
 
+        var mondayEl = document.createElement("li");
+        mondayEl.textContent = "Monday: " + parkData[i].operatingHours[0].standardHours.monday;
+        operatingHours.append(mondayEl);
+        var tuesdayEl = document.createElement("li");
+        tuesdayEl.textContent = "Tuesday: " + parkData[i].operatingHours[0].standardHours.tuesday;
+        operatingHours.append(tuesdayEl);
+        var wednesdayEl = document.createElement("li");
+        wednesdayEl.textContent = "Wednesday: " + parkData[i].operatingHours[0].standardHours.wednesday;
+        operatingHours.append(wednesdayEl);
+        var thursdayEl = document.createElement("li");
+        thursdayEl.textContent = "Thursday: " + parkData[i].operatingHours[0].standardHours.thursday;
+        operatingHours.append(thursdayEl);
+        var fridayEl = document.createElement("li");
+        fridayEl.textContent = "Friday: " + parkData[i].operatingHours[0].standardHours.friday;
+        operatingHours.append(fridayEl);
+        var saturdayEl = document.createElement("li");
+        saturdayEl.textContent = "Saturday: " + parkData[i].operatingHours[0].standardHours.saturday;
+        operatingHours.append(saturdayEl);
+        var sundayEl = document.createElement("li");
+        sundayEl.textContent = "Sunday: " + parkData[i].operatingHours[0].standardHours.sunday;
+        operatingHours.append(sundayEl);
+        cardContainerEl.append(operatingHours);
+        
+
+        cardEl.append(cardContainerEl);
         resultsEl.append(cardCellEl);
     }
 }
