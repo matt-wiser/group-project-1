@@ -22,6 +22,12 @@ function getFormData(){
     }
     // console.log(searchData);
     submitRequest(searchData);
+    if (localStorage.getItem("searchData") === null) {
+        localStorage.setItem('searchData', JSON.stringify(searchData));
+    } else {
+       localStorage.removeItem("searchData"); 
+       localStorage.setItem('searchData', JSON.stringify(searchData));
+    }    
 }
 
 function constructQueryUrl(searchData){
@@ -40,7 +46,14 @@ function submitRequest(searchData){
     .then(function(response){
         updateView(response.data);
         latLongcalc(response.data);
-        console.log(response.data);  
+        console.log(response.data);
+        
+        if (localStorage.getItem("npsData") === null) {
+            localStorage.setItem('npsData', JSON.stringify(response.data));
+        } else {
+           localStorage.removeItem("npsData"); 
+           localStorage.setItem('npsData', JSON.stringify(response.data));
+        }
     })
 }
 
