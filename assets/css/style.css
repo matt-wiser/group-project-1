@@ -1,4 +1,4 @@
-.hero-section {
+#hero-section {
     background: url(../images/trees.jpg) 50% no-repeat;
     background-size: cover;
     height: 60vh;
@@ -8,11 +8,67 @@
     justify-content: center;
 }
 
-.hero-section .hero-section-text {
+#hero-section #hero-section-text {
     color: white;
     text-shadow: 1px 1px 2px black;
 }
 
 label {
     margin-bottom: 10px;
+}
+
+.card {
+    padding-bottom: 15px;
+}
+
+.card h5{
+    padding: 12px;
+}
+
+.card p{
+    padding: 12px;
+    margin-left: 8px;
+}
+
+.center-cropped {
+    width: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+/* set image height to 200px at small screen size */
+@media screen and (max-width: 39.9375em) {
+    .card .center-cropped{
+        height: 200px;
+    }
+}
+
+/* set image height to 250px at medium screen size*/
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+    .card .center-cropped{
+        height: 250px;
+    }   
+}
+
+/* set image height to 300px at large and up screen size */
+@media screen and (min-width: 64em) {
+    .card .center-cropped{
+        height: 300px;
+    }
+}
+
+.operating-hours{
+    list-style: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.operating-hours li {
+    display: inline-block;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+.park-link{
+    margin-left: 20px;
 }
