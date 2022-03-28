@@ -85,6 +85,8 @@ function constructParkCards(parkData){
         cardContainerEl.append(operatingHours);
 
         var entryCostEl = document.createElement("p");
+        entryCostEl.setAttribute("class", "entry-cost");
+        cardContainerEl.setAttribute("data-entry-cost", parkData[i].entranceFees[0].cost);
         entryCostEl.textContent = "Entrance Cost: $" + parkData[i].entranceFees[0].cost;
         cardContainerEl.append(entryCostEl);
 
