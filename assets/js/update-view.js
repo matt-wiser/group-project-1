@@ -83,7 +83,11 @@ function constructParkCards(parkData){
         sundayEl.textContent = "Sunday: " + parkData[i].operatingHours[0].standardHours.sunday;
         operatingHours.append(sundayEl);
         cardContainerEl.append(operatingHours);
-        
+
+        var entryCostEl = document.createElement("p");
+        entryCostEl.textContent = "Entrance Cost: $" + parkData[i].entranceFees[0].cost;
+        cardContainerEl.append(entryCostEl);
+
         var parkUrl = document.createElement("a");
         parkUrl.setAttribute("href", parkData[i].url);
         parkUrl.setAttribute("class", "park-link");
