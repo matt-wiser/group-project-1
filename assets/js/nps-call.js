@@ -20,7 +20,7 @@ function getFormData(){
         city: city,
         zipCode: zipCode,
     }
-    console.log(searchData);
+    // console.log(searchData);
     submitRequest(searchData);
 }
 
@@ -41,49 +41,11 @@ function submitRequest(searchData){
         updateView(response.data);
         latLongcalc(response.data);
         console.log(response.data);
+        
     })
 }
 
 
-function updateView(npsData){
-    var heroEl = document.getElementById('hero-section');
-    heroEl.style.height = '15vh';
-
-    var subheads = document.getElementsByClassName('subhead');
-    while (subheads[0]) {
-        subheads[0].parentNode.removeChild(subheads[0])
-    }
-    
-    var mainContentEl = document.getElementById('content-container');
-    removeAllChildNodes(mainContentEl);
-    
-    var filtersEl = document.getElementById('filters-results');
-    filtersEl.classList.remove('hide');
-
-    constructParkCards(npsData);
-}
-
-function constructParkCards(parkData){
-    var resultsEl = document.getElementById('results-container');
-    
-    for (let i = 0; i < parkData.length; i++) {
-        var cardContainerEl = document.createElement('div');
-        cardContainerEl.setAttribute("class", "cell small-12 large-4");
-        
-
-        var cardEl = document.createElement('div');
-        cardEl.setAttribute("class", "card");
-        cardContainerEl.append(cardEl);
-
-        var parkImageEl = document.createElement('img');
-        parkImageEl.setAttribute('src', parkData[i].images[0].url);
-        parkImageEl.setAttribute('alt', parkData[i].images[0].altText);
-        
-        cardEl.append(parkImageEl);
-
-        resultsEl.append(cardEl);
-    }
-}
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -99,7 +61,7 @@ function latLongcalc(parkData) {
         response = response.json();
         return response;
     }).then(function(response){
-        console.log(response);
+        // console.log(response);
     })
 }
 
