@@ -45,7 +45,6 @@ function submitRequest(searchData){
     })
     .then(function(response){
         updateView(response.data);
-        latLongcalc(response.data);
         console.log(response.data);
         
         if (localStorage.getItem("npsData") === null) {
@@ -56,27 +55,5 @@ function submitRequest(searchData){
         }
     })
 }
-
-function latLongcalc(parkData) {
-    var sunsetDate = "&date=today";
-    
-    for (let i = 0; i < parkData.length; i++) {
-        var lat = parkData[i].latitude;
-        var long = parkData[i].longitude;
-        fetch("https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + long + sunsetDate)
-        .then(function(response){
-            response = response.json();
-            return response;
-        }).then(function(response){
-            // console.log(response);
-        })                
-    }
-}
-
-
-
-
-
-
 
 $('#submitaddress').click(getFormData);
