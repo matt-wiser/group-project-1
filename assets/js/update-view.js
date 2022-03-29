@@ -8,6 +8,7 @@ function removeAllChildNodes(parent) {
 }
 
 function updateView(npsData){
+
     var heroEl = document.getElementById('hero-section');
     heroEl.style.height = '15vh';
     heroEl.style.marginBottom = "20px";
@@ -71,6 +72,78 @@ function populateActivities(array){
     }
 }
 
+function createParkImage(parkData) {
+    var parkImageEl = document.createElement('div');
+    var backgroundImageUrl = "background-image: url('" + parkData.images[0].url + "')";
+    parkImageEl.setAttribute("style", backgroundImageUrl);
+    parkImageEl.setAttribute("class", "center-cropped");
+    return parkImageEl;
+}
+
+function createCardTitle(parkData){
+    var parkNameEl = document.createElement('h5');
+    parkNameEl.textContent = parkData.fullName;
+    var cardTitleEl = document.createElement('div');
+    cardTitleEl.setAttribute("class", "card-divider");
+    cardTitleEl.append(parkNameEl);
+    return cardTitleEl;
+}
+
+function createParkDescription(parkData){
+    var parkDescriptionEl = document.createElement('p');
+    parkDescriptionEl.textContent = parkData.description;
+    return parkDescriptionEl;
+}
+
+function creatOperatingHours(parkData) {
+    var operatingHours = document.createElement("ul");
+    operatingHours.setAttribute("class", "operating-hours");
+    operatingHours.textContent = "Operating Hours ";
+    var breakEl = document.createElement("br");
+    operatingHours.append(breakEl);
+    
+    var mondayEl = document.createElement("li");
+    mondayEl.textContent = "Monday: " + parkData.operatingHours[0].standardHours.monday;
+    operatingHours.append(mondayEl);
+    var tuesdayEl = document.createElement("li");
+    tuesdayEl.textContent = "Tuesday: " + parkData.operatingHours[0].standardHours.tuesday;
+    operatingHours.append(tuesdayEl);
+    var wednesdayEl = document.createElement("li");
+    wednesdayEl.textContent = "Wednesday: " + parkData.operatingHours[0].standardHours.wednesday;
+    operatingHours.append(wednesdayEl);
+    var thursdayEl = document.createElement("li");
+    thursdayEl.textContent = "Thursday: " + parkData.operatingHours[0].standardHours.thursday;
+    operatingHours.append(thursdayEl);
+    var fridayEl = document.createElement("li");
+    fridayEl.textContent = "Friday: " + parkData.operatingHours[0].standardHours.friday;
+    operatingHours.append(fridayEl);
+    var saturdayEl = document.createElement("li");
+    saturdayEl.textContent = "Saturday: " + parkData.operatingHours[0].standardHours.saturday;
+    operatingHours.append(saturdayEl);
+    var sundayEl = document.createElement("li");
+    sundayEl.textContent = "Sunday: " + parkData.operatingHours[0].standardHours.sunday;
+    operatingHours.append(sundayEl);
+
+    return operatingHours;
+}
+
+function createEntryCost(parkData){
+    var entryCostEl = document.createElement("p");
+    entryCostEl.setAttribute("class", "entry-cost");
+    entryCostEl.textContent = "Entrance Cost: $" + parkData.entranceFees[0].cost;
+
+    return entryCostEl;
+}
+
+function createParkUrl(parkData){
+    var parkUrl = document.createElement("a");
+    parkUrl.setAttribute("href", parkData.url);
+    parkUrl.setAttribute("class", "park-link");
+    parkUrl.textContent = "Official Website";
+
+    return parkUrl;
+}
+
 function constructParkCards(parkData){
     var resultsEl = document.getElementById('results-container');
     
@@ -83,66 +156,27 @@ function constructParkCards(parkData){
         cardEl.setAttribute("class", "card");
         cardCellEl.append(cardEl);
 
-        var parkImageEl = document.createElement('div');
-        var backgroundImageUrl = "background-image: url('" + parkData[i].images[0].url + "')";
-        parkImageEl.setAttribute("style", backgroundImageUrl);
-        parkImageEl.setAttribute("class", "center-cropped");
-        cardEl.append(parkImageEl);
-
         var cardContainerEl = document.createElement('div');
         cardContainerEl.setAttribute('class', 'card-container');
+
+        var parkImageEl = createParkImage(parkData[i]);
+        cardEl.append(parkImageEl);
         
-        var parkNameEl = document.createElement('h5');
-        parkNameEl.textContent = parkData[i].fullName;
-        var cardTitleEl = document.createElement('div');
-        cardTitleEl.setAttribute("class", "card-divider");
-        cardTitleEl.append(parkNameEl);
+        var cardTitleEl = createCardTitle(parkData[i]);
         cardContainerEl.append(cardTitleEl);
 
-        var parkDescriptionEl = document.createElement('p');
-        parkDescriptionEl.textContent = parkData[i].description;
+        var parkDescriptionEl = createParkDescription(parkData[i]);
         cardContainerEl.append(parkDescriptionEl);
 
-        var operatingHours = document.createElement("ul");
-        operatingHours.setAttribute("class", "operating-hours");
-        operatingHours.textContent = "Operating Hours ";
-        var breakEl = document.createElement("br");
-        operatingHours.append(breakEl);
-        
-        var mondayEl = document.createElement("li");
-        mondayEl.textContent = "Monday: " + parkData[i].operatingHours[0].standardHours.monday;
-        operatingHours.append(mondayEl);
-        var tuesdayEl = document.createElement("li");
-        tuesdayEl.textContent = "Tuesday: " + parkData[i].operatingHours[0].standardHours.tuesday;
-        operatingHours.append(tuesdayEl);
-        var wednesdayEl = document.createElement("li");
-        wednesdayEl.textContent = "Wednesday: " + parkData[i].operatingHours[0].standardHours.wednesday;
-        operatingHours.append(wednesdayEl);
-        var thursdayEl = document.createElement("li");
-        thursdayEl.textContent = "Thursday: " + parkData[i].operatingHours[0].standardHours.thursday;
-        operatingHours.append(thursdayEl);
-        var fridayEl = document.createElement("li");
-        fridayEl.textContent = "Friday: " + parkData[i].operatingHours[0].standardHours.friday;
-        operatingHours.append(fridayEl);
-        var saturdayEl = document.createElement("li");
-        saturdayEl.textContent = "Saturday: " + parkData[i].operatingHours[0].standardHours.saturday;
-        operatingHours.append(saturdayEl);
-        var sundayEl = document.createElement("li");
-        sundayEl.textContent = "Sunday: " + parkData[i].operatingHours[0].standardHours.sunday;
-        operatingHours.append(sundayEl);
-        cardContainerEl.append(operatingHours);
+        var operatingHoursEl = creatOperatingHours(parkData[i]);
+        cardContainerEl.append(operatingHoursEl);
 
-        var entryCostEl = document.createElement("p");
-        entryCostEl.setAttribute("class", "entry-cost");
+        var entryCostEl = createEntryCost(parkData[i]);
         cardContainerEl.setAttribute("data-entry-cost", parkData[i].entranceFees[0].cost);
-        entryCostEl.textContent = "Entrance Cost: $" + parkData[i].entranceFees[0].cost;
         cardContainerEl.append(entryCostEl);
 
-        var parkUrl = document.createElement("a");
-        parkUrl.setAttribute("href", parkData[i].url);
-        parkUrl.setAttribute("class", "park-link");
-        parkUrl.textContent = "Official Website";
-        cardContainerEl.append(parkUrl);
+        var parkUrlEl = createParkUrl(parkData[i]);
+        cardContainerEl.append(parkUrlEl);
 
         for (let x = 0; x < parkData[i].topics.length; x++) {            
             cardContainerEl.setAttribute("data-topic" + "-" + [x], parkData[i].topics[x].name);

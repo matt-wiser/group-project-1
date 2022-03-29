@@ -58,15 +58,25 @@ function submitRequest(searchData){
 }
 
 function latLongcalc(parkData) {
-    var lat = parkData[0].latitude;
-    var long = parkData[0].longitude;
-    fetch("https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + long)
-    .then(function(response){
-        response = response.json();
-        return response;
-    }).then(function(response){
-        // console.log(response);
-    })
+    var sunsetDate = "&date=today";
+    
+    for (let i = 0; i < parkData.length; i++) {
+        var lat = parkData[i].latitude;
+        var long = parkData[i].longitude;
+        fetch("https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + long + sunsetDate)
+        .then(function(response){
+            response = response.json();
+            return response;
+        }).then(function(response){
+            console.log(response);
+        })                
+    }
 }
+
+
+
+
+
+
 
 $('#submitaddress').click(getFormData);
