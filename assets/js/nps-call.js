@@ -1,7 +1,8 @@
 var npsUrl = 'https://developer.nps.gov/api/v1/parks?api_key=Zn4OQSperFdVsW4h6jkMEi8SKODcfpVLsQ43wFqA'
- 
+$(document).foundation();
+
 function getFormData(){
-    var selectedState = document.getElementById('stateSelect');
+    var selectedState = document.getElementById('state-select');
     selectedState = selectedState.value;
 
     var streetAddress = document.getElementById('address');
@@ -19,23 +20,15 @@ function getFormData(){
         city: city,
         zipCode: zipCode,
     }
-    console.log(searchData);
+    // console.log(searchData);
     submitRequest(searchData);
-//     window.localStorage.setItem('recently viewed', JSON.stringify(searchData));
-// 
-    function createItem() {
-        localStorage.setItem('recentlySearched', JSON.stringify(searchData.selectedState));
-    
-    }
-    
-     createItem()
-
-    function getValue() {
-        return localStorage.getItem('recentlySearched');
-    }
-    console.log(getValue());
+    if (localStorage.getItem("searchData") === null) {
+        localStorage.setItem('searchData', JSON.stringify(searchData));
+    } else {
+       localStorage.removeItem("searchData"); 
+       localStorage.setItem('searchData', JSON.stringify(searchData));
+    }    
 }
-
 
 function constructQueryUrl(searchData){
     var queryUrl = npsUrl + '&stateCode=' + searchData.selectedState;
@@ -54,31 +47,30 @@ function submitRequest(searchData){
         updateView(response.data);
         latLongcalc(response.data);
         console.log(response.data);
+        
+        if (localStorage.getItem("npsData") === null) {
+            localStorage.setItem('npsData', JSON.stringify(response.data));
+        } else {
+           localStorage.removeItem("npsData"); 
+           localStorage.setItem('npsData', JSON.stringify(response.data));
+        }
     })
 }
+
 function latLongcalc(parkData) {
-    var lat = parkData[0].latitude;
-    var long = parkData[0].longitude;
-    fetch("https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + long)
-    .then(function(response){
-        response = response.json();
-        return response;
-    }).then(function(response){
-        console.log(response);
-    })
-}
-// const stateSelect = document.getElementById("stateSelect");
-// const lsDisplay = document.getElementById("lsDisplay");
-// const submitAddress = document.getElementById("submitAddress");
-
-// stateSelect.addEventListener('select', recent => {
-//     lsDisplay.textContent = recent.target.value
-// })
-
-
-
-function updateView(npsData){
-
+    var sunsetDate = "&date=today";
+    
+    for (let i = 0; i < parkData.length; i++) {
+        var lat = parkData[i].latitude;
+        var long = parkData[i].longitude;
+        fetch("https://api.sunrise-sunset.org/json?lat=" + lat + "&lng=" + long + sunsetDate)
+        .then(function(response){
+            response = response.json();
+            return response;
+        }).then(function(response){
+            console.log(response);
+        })                
+    }
 }
 
-$('#submitAddress').click(getFormData);
+$('#submitaddress').click(getFormData);

@@ -3,6 +3,7 @@ var hereKey = "aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok";
 var homeLat = ""
 var homeLon = ""
 
+
 function getAddData() {
     var homeStAdd = document.querySelector("#address").value.trim().replace(/ /g, "_");
     console.log('homeStAdd: ', homeStAdd);
@@ -22,7 +23,14 @@ function getAddData() {
       console.log('latLon: ', latLon);
       homeLat = latLon.homeLat;
       homeLon = latLon.homeLon;
-      getSummaryInfo();
+      var parkArray = localStorage.getItem("npsData");
+      parkArray = JSON.parse(parkArray);
+      console.log('parkArray: ', parkArray);
+      for (let i = 0; i < parkArray.length; i++) {
+        getSummaryInfo(parkArray[i].latitude, parkArray[i].longitude);
+        
+      }
+      
     })
 }
 
@@ -53,8 +61,8 @@ function getLatLonAddress(addData) {
         })
 }
 
-function getSummaryInfo() {
-  var hereCallSummary = `https://router.hereapi.com/v8/routes?transportMode=car&origin=${homeLat},${homeLon}&destination=35.890301,-86.395500&return=summary&apikey=aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok`
+function getSummaryInfo(lat, lon) {
+  var hereCallSummary = `https://router.hereapi.com/v8/routes?transportMode=car&origin=${homeLat},${homeLon}&destination=${lat},${lon}&return=summary&apikey=aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok`
   fetch(hereCallSummary)
   .then(function (response) {
     if (response.ok) {
