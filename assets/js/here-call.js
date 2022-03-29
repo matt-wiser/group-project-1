@@ -1,9 +1,10 @@
 var hereUrl = "https://router.hereapi.com/v8routes?apiKey=";
 var hereKey = "aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok";
+// set global variables for use in sharing information later
 var homeLat = ""
 var homeLon = ""
 
-
+//get address information from the user input
 function getAddData() {
     var homeStAdd = document.querySelector("#address").value.trim().replace(/ /g, "_");
     console.log('homeStAdd: ', homeStAdd);
@@ -18,6 +19,7 @@ function getAddData() {
         homeZip: homeZip,
     }
     console.log(addData);
+    //call the function to use latitude and longitude from addresses
     getLatLonAddress(addData)
     .then(function(latLon){
       console.log('latLon: ', latLon);
@@ -26,14 +28,16 @@ function getAddData() {
       var parkArray = localStorage.getItem("npsData");
       parkArray = JSON.parse(parkArray);
       console.log('parkArray: ', parkArray);
+      // loop through park information given the home latlon to get route information
       for (let i = 0; i < parkArray.length; i++) {
-        getSummaryInfo(parkArray[i].latitude, parkArray[i].longitude);
+        getSummaryInfo(parkArray[i].latitude, parkArray[i].longitude, parkArray[i].id);
         
       }
       
     })
 }
 
+// create a function to take user input of address to get latitude and linitude from address
 function getLatLonAddress(addData) {
 
     console.log(addData);
@@ -61,7 +65,9 @@ function getLatLonAddress(addData) {
         })
 }
 
-function getSummaryInfo(lat, lon) {
+// here we get summary information for the trip duration and length
+
+function getSummaryInfo(lat, lon, id) {
   var hereCallSummary = `https://router.hereapi.com/v8/routes?transportMode=car&origin=${homeLat},${homeLon}&destination=${lat},${lon}&return=summary&apikey=aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok`
   fetch(hereCallSummary)
   .then(function (response) {
@@ -73,11 +79,25 @@ function getSummaryInfo(lat, lon) {
   })
   .then(function (data) {
     console.log('data: ', data);
-
+    let length = data[0].sections[0].baseDuration/360;
+    length = length.toFixed(2);
+    let time = data[0].sections[0].summary.length/1609.34;
+    time = time.toFixed(2);
+    //Option:1 using id for card in the update-viewer script, append length and duration of trip
+     $(`#${id}`).append(`<h6>Duration: ${length} miles</h6><p>Time: ${duration} hours</p>`)
+     //Option:2-- if choose, set the same summary information into local storage for use in cards describing parks
+    //  let distanceTimeA= JSON.parse(localStorage.getItem("distanceTime"))|| []
+  
+    //  let details = {
+    //    id: id,
+    //    time : time,
+    //    duration : duration
+    //  }
+    //  distanceTimeA.push(details)
+    //  localStorage.setItem("distanceTime",JSON.stringify(distanceTimeA))
   })
-
+ 
 }
-
 
    
    $('#submitaddress').click(getAddData);

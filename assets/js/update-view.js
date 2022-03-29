@@ -34,7 +34,7 @@ function constructParkCards(parkData){
         var cardEl = document.createElement('div');
         cardEl.setAttribute("class", "card");
         cardCellEl.append(cardEl);
-
+//cardEl.setAttribute("id",parkData[i].id)
         var parkImageEl = document.createElement('div');
         var backgroundImageUrl = "background-image: url('" + parkData[i].images[0].url + "')";
         parkImageEl.setAttribute("style", backgroundImageUrl);
