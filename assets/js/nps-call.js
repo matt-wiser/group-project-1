@@ -68,7 +68,7 @@ function latLongcalc(parkData) {
             response = response.json();
             return response;
         }).then(function(response){
-            console.log(response);
+            // console.log(response);
         })                
     }
 }
