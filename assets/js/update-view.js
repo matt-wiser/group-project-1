@@ -69,7 +69,7 @@ function addTravelInfo(parkData){
         
                 $(`#${travelInfo.id}`).append(travelTimeEl);
                 $(`#${travelInfo.id}`).append(travelDistanceEl);
-            }, 3200)
+            }, 3000)
         }
         
 
@@ -87,12 +87,12 @@ function poplateTopics(array){
     // This loops through the filtered topics array, constructing checkboxes, labels and a break element before appending them to the page
     for (let i = 0; i < array.length; i++) {
         var checkboxLabelEl = document.createElement("label");
-        checkboxLabelEl.setAttribute("for", "checkbox-topic-" + i);
+        checkboxLabelEl.setAttribute("for", "checkbox-topic");
         checkboxLabelEl.textContent = array[i];
 
         var checkboxEl = document.createElement("input");
         checkboxEl.setAttribute("type", "checkbox");
-        checkboxEl.setAttribute("id", "checkbox-topic-" + i);
+        checkboxEl.setAttribute("id", "checkbox-topic");
         
         var breakEl = document.createElement("br");
 
@@ -114,12 +114,12 @@ function populateActivities(array){
     // This loops through the filtered activities array, constructing checkboxes, labels and a break element before appending them to the page
     for (let i = 0; i < array.length; i++) {
         var checkboxLabelEl = document.createElement("label");
-        checkboxLabelEl.setAttribute("for", "checkbox-activity-" + i);
+        checkboxLabelEl.setAttribute("for", "checkbox-activity");
         checkboxLabelEl.textContent = array[i];
 
         var checkboxEl = document.createElement("input");
         checkboxEl.setAttribute("type", "checkbox");
-        checkboxEl.setAttribute("id", "checkbox-activity-" + i);
+        checkboxEl.setAttribute("id", "checkbox-activity");
         
         var breakEl = document.createElement("br");
 
@@ -156,36 +156,46 @@ function createParkDescription(parkData){
 }
 
 // This function creates the operating hours for an indivudal park card, it is called in constructParkCard for each park within the array. It returns a fully constructed operating element
-function creatOperatingHours(parkData) {
-    var operatingHours = document.createElement("ul");
-    operatingHours.setAttribute("class", "operating-hours");
-    operatingHours.textContent = "Operating Hours ";
-    var breakEl = document.createElement("br");
-    operatingHours.append(breakEl);
+function createOperatingHours(parkData) {
     
-    var mondayEl = document.createElement("li");
-    mondayEl.textContent = "Monday: " + parkData.operatingHours[0].standardHours.monday;
-    operatingHours.append(mondayEl);
-    var tuesdayEl = document.createElement("li");
-    tuesdayEl.textContent = "Tuesday: " + parkData.operatingHours[0].standardHours.tuesday;
-    operatingHours.append(tuesdayEl);
-    var wednesdayEl = document.createElement("li");
-    wednesdayEl.textContent = "Wednesday: " + parkData.operatingHours[0].standardHours.wednesday;
-    operatingHours.append(wednesdayEl);
-    var thursdayEl = document.createElement("li");
-    thursdayEl.textContent = "Thursday: " + parkData.operatingHours[0].standardHours.thursday;
-    operatingHours.append(thursdayEl);
-    var fridayEl = document.createElement("li");
-    fridayEl.textContent = "Friday: " + parkData.operatingHours[0].standardHours.friday;
-    operatingHours.append(fridayEl);
-    var saturdayEl = document.createElement("li");
-    saturdayEl.textContent = "Saturday: " + parkData.operatingHours[0].standardHours.saturday;
-    operatingHours.append(saturdayEl);
-    var sundayEl = document.createElement("li");
-    sundayEl.textContent = "Sunday: " + parkData.operatingHours[0].standardHours.sunday;
-    operatingHours.append(sundayEl);
+    if (parkData.operatingHours[0]) {
+        var operatingHours = document.createElement("ul");
+        operatingHours.setAttribute("class", "operating-hours");
+        operatingHours.textContent = "Operating Hours ";
+        var breakEl = document.createElement("br");
+        operatingHours.append(breakEl);
+        
+        var mondayEl = document.createElement("li");
+        mondayEl.textContent = "Monday: " + parkData.operatingHours[0].standardHours.monday;
+        operatingHours.append(mondayEl);
+        var tuesdayEl = document.createElement("li");
+        tuesdayEl.textContent = "Tuesday: " + parkData.operatingHours[0].standardHours.tuesday;
+        operatingHours.append(tuesdayEl);
+        var wednesdayEl = document.createElement("li");
+        wednesdayEl.textContent = "Wednesday: " + parkData.operatingHours[0].standardHours.wednesday;
+        operatingHours.append(wednesdayEl);
+        var thursdayEl = document.createElement("li");
+        thursdayEl.textContent = "Thursday: " + parkData.operatingHours[0].standardHours.thursday;
+        operatingHours.append(thursdayEl);
+        var fridayEl = document.createElement("li");
+        fridayEl.textContent = "Friday: " + parkData.operatingHours[0].standardHours.friday;
+        operatingHours.append(fridayEl);
+        var saturdayEl = document.createElement("li");
+        saturdayEl.textContent = "Saturday: " + parkData.operatingHours[0].standardHours.saturday;
+        operatingHours.append(saturdayEl);
+        var sundayEl = document.createElement("li");
+        sundayEl.textContent = "Sunday: " + parkData.operatingHours[0].standardHours.sunday;
+        operatingHours.append(sundayEl);
+    
+        return operatingHours;
+    } else {
+        var operatingHours = document.createElement("p")
+        operatingHours.textContent = "No operating hours available";
 
-    return operatingHours;
+        return operatingHours;
+    }
+    
+
 }
 
 // This function creates the entry cost for an indivudal park card, it is called in constructParkCard for each park within the array. It returns a fully constructed entry cost element
@@ -243,7 +253,7 @@ function constructParkCards(parkData){
         var parkDescriptionEl = createParkDescription(parkData[i]);
         cardContainerEl.append(parkDescriptionEl);
 
-        var operatingHoursEl = creatOperatingHours(parkData[i]);
+        var operatingHoursEl = createOperatingHours(parkData[i]);
         cardContainerEl.append(operatingHoursEl);
 
         var entryCostEl = createEntryCost(parkData[i]);
