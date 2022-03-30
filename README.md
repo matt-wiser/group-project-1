@@ -24,4 +24,4 @@ Create a responsive website with calls to at least 2 APIs that uses persistent l
 * Chris Warren
 * Matthew Wiser
 
-![Screenshot](/assets/nationalparkfinder.jpg)
+![Screenshot](/assets/images/nationalparkfinder.jpg)
