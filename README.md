@@ -1,12 +1,27 @@
-# Group Prject 1 - National Parks and Camping Mapping
+# National Parks Finder and Travel Estimator
 
-User is able to open webpage to attracting image with prompts to enter values for the forms.
-User should be able to easily recognize inputs desired for fields
-User able to submit the form and receive information regarding search criteria through our API's utilizes
-User should be able to see full list of national parks based on selected state field due to fetched national park services API
-User should be able to see driving details from address entered to state parks selected due to fetched maps API
-User should be able to view the details of present date's sunrise/sunset in console due to sunrise and sunset API
-User should be able to view their own recently selected states in console due to local storage.
+## Purpose
+Create a responsive website with calls to at least 2 APIs that uses persistent local storage and at least one non-bootstrap 3rd party CSS framework
+
+## User Experience
+* When user visits the page, they are greeted with an attractive opening and are asked for information about their starting address and the location they would like to visit
+* When user inputs starting address and state they would like to vist, the page populates with the national parks in that state
+* The National Park information is displayed on a card containing general park information, hours, whether there is a fee for visiting, and estimated driving distance and time
+* Filtering information is offered to the user to find parks that meet their personal interests
+* 
+## Built With
+* HTML
+* CSS
+* Javascript
+
+## Website
+### https://matt-wiser.github.io/national-park-finder/index.html
 
 
-![Recording 2022-03-27 at 17 00 12](https://user-images.githubusercontent.com/99000478/160307592-c336a6ac-d8a9-40cf-92cd-1be690d663fe.gif)
+## Contribution
+* Anthony Crite
+* Dakota Straub
+* Chris Warren
+* Matthew Wiser
+
+![Screenshot](/assets/nationalparkfinder.jpg)
