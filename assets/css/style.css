@@ -1,7 +1,7 @@
 #hero-section {
     background: url(../images/trees.jpg) 50% no-repeat;
     background-size: cover;
-    height: 60vh;
+    height: 50vh;
     text-align: center;
     display: flex;
     align-items: center;
