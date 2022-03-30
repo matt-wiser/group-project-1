@@ -1,36 +1,38 @@
 var hereUrl = "https://router.hereapi.com/v8routes?apiKey=";
 var hereKey = "aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok";
 // set global variables for use in sharing information later
-var homeLat = "";
-var homeLon = "";
 
-function getLatLonAddress(searchData) {
-    //find latitude and logitude from address information
-    var hereLatLonUrl = `https://geocode.search.hereapi.com/v1/geocode?apiKey=${hereKey}&q=${searchData.streetAddress}+${searchData.city}+${searchData.zipCode}`;
 
-    return fetch(hereLatLonUrl)
-        .then(function (response) {
-            if (response.ok) {  
-              return response.json()
-            } else {
-                console.log("Error: Latitude/Longitude not found");
-            }
-        })
-        .then(function (data) {
-            homeLat = data.items[0].position.lat;
-            homeLon = data.items[0].position.lng;
-            var parkArray = localStorage.getItem("npsData");
-            parkArray = JSON.parse(parkArray);
-            
+function getLatLonAddress(searchData, npsData) {
+  //find latitude and logitude from address information
+  var hereLatLonUrl = `https://geocode.search.hereapi.com/v1/geocode?apiKey=${hereKey}&q=${searchData.streetAddress}+${searchData.city}+${searchData.zipCode}`;
+
+  return fetch(hereLatLonUrl)
+      .then(function (response) {
+          if (response.ok) {  
+            return response.json()
+          } else {
+              console.log("Error: Latitude/Longitude not found");
+          }
+      })
+      .then(function (data) {
+          var homeLat = "";
+          var homeLon = "";
+          homeLat = data.items[0].position.lat;
+          homeLon = data.items[0].position.lng;
+          
             // loop through park information given the home latlon to get route information
-            for (let i = 0; i < parkArray.length; i++) {
-              getSummaryInfo(parkArray[i].latitude, parkArray[i].longitude, parkArray[i].id);
+            for (let i = 0; i < npsData.length; i++) {
+              getSummaryInfo(homeLat, homeLon, npsData[i].latitude, npsData[i].longitude, npsData[i].id);
             }
-        })
+      })
+      .then(function(){
+        addTravelInfo(npsData);
+      })
 }
 
 // here we get summary information for the trip duration and length
-function getSummaryInfo(lat, lon, id) {
+function getSummaryInfo(homeLat, homeLon, lat, lon, id) {
   var hereCallSummary = `https://router.hereapi.com/v8/routes?transportMode=car&origin=${homeLat},${homeLon}&destination=${lat},${lon}&return=summary&apikey=aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok`
   fetch(hereCallSummary)
   .then(function (response) {
@@ -59,7 +61,7 @@ function getSummaryInfo(lat, lon, id) {
       } else {
        localStorage.removeItem(id); 
        localStorage.setItem(id, JSON.stringify(details));
-      }    
+      }
 
     } else {
       let distance = "No Route Found";
