@@ -39,6 +39,43 @@ function updateView(npsData){
     constructParkCards(npsData);
 }
 
+function addTravelInfo(parkData){
+    
+    for (let i = 0; i < parkData.length; i++) {
+        if (localStorage.getItem(parkData[i].id)) {
+            var travelInfo = localStorage.getItem(parkData[i].id);
+            travelInfo = JSON.parse(travelInfo);
+            console.log(travelInfo);
+            
+            var travelTimeEl = document.createElement("p");
+            travelTimeEl.textContent = "Estimated Travel Time: " + travelInfo.duration + " Hours";
+    
+            var travelDistanceEl = document.createElement("p");
+            travelDistanceEl.textContent = "Distance from Home: " + travelInfo.distance + " Miles";
+    
+            $(`#${travelInfo.id}`).append(travelTimeEl);
+            $(`#${travelInfo.id}`).append(travelDistanceEl);
+        } else {
+            setTimeout(function(){
+                var travelInfo = localStorage.getItem(parkData[i].id);
+                travelInfo = JSON.parse(travelInfo);
+                console.log(travelInfo);
+                
+                var travelTimeEl = document.createElement("p");
+                travelTimeEl.textContent = "Estimated Travel Time: " + travelInfo.duration + " Hours";
+        
+                var travelDistanceEl = document.createElement("p");
+                travelDistanceEl.textContent = "Distance from Home: " + travelInfo.distance + " Miles";
+        
+                $(`#${travelInfo.id}`).append(travelTimeEl);
+                $(`#${travelInfo.id}`).append(travelDistanceEl);
+            }, 3000)
+        }
+        
+
+    }
+}
+
 // This function populates the topics area within the filters panel, it is called in constructParkCards once all data has been collected
 function poplateTopics(array){
     // This filters out all duplicated topics that occur within the topics array
@@ -155,7 +192,13 @@ function creatOperatingHours(parkData) {
 function createEntryCost(parkData){
     var entryCostEl = document.createElement("p");
     entryCostEl.setAttribute("class", "entry-cost");
-    entryCostEl.textContent = "Entrance Cost: $" + parkData.entranceFees[0].cost;
+    
+    if (parkData.entranceFees[0]) {
+        entryCostEl.textContent = "Entrance Cost: $" + parkData.entranceFees[0].cost;
+    } else {
+        entryCostEl.textContent = "Entrance Cost: $0.00"
+    }
+    
 
     return entryCostEl;
 }
@@ -189,6 +232,7 @@ function constructParkCards(parkData){
 
         var cardContainerEl = document.createElement('div');
         cardContainerEl.setAttribute('class', 'card-container');
+        cardContainerEl.setAttribute('id', parkData[i].id);
 
         var parkImageEl = createParkImage(parkData[i]);
         cardEl.append(parkImageEl);
@@ -203,7 +247,11 @@ function constructParkCards(parkData){
         cardContainerEl.append(operatingHoursEl);
 
         var entryCostEl = createEntryCost(parkData[i]);
-        cardContainerEl.setAttribute("data-entry-cost", parkData[i].entranceFees[0].cost);
+        if (parkData[i].entranceFees[0]) {
+            cardContainerEl.setAttribute("data-entry-cost", parkData[i].entranceFees[0].cost);
+        } else {
+            cardContainerEl.setAttribute("data-entry-cost", "0.00");
+        }
         cardContainerEl.append(entryCostEl);
 
         var parkUrlEl = createParkUrl(parkData[i]);
@@ -223,4 +271,5 @@ function constructParkCards(parkData){
     }
     populateActivities(activitiesArray);
     poplateTopics(topicsArray);
+    addTravelInfo(parkData);
 }

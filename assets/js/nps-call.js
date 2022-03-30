@@ -10,15 +10,15 @@ function getFormData(){
 
     //This pulls the street address value and adds it to a variable
     var streetAddress = document.getElementById('address');
-    streetAddress = streetAddress.value;
+    streetAddress = streetAddress.value.trim().replace(/ /g, "_");
 
     //This pulls the city value and adds it to a variable
     var city = document.getElementById('city');
-    city = city.value;
+    city = city.value.trim().replace(/ /g, "_");
 
     //This pulls the zip code value and adds it to a variable
     var zipCode = document.getElementById('zip');
-    zipCode = zipCode.value;
+    zipCode = zipCode.value.trim().replace(/ /g, "_");
 
     //This creates an object that contains all user furnished search information using the previously created variables
     var searchData = {
@@ -30,7 +30,8 @@ function getFormData(){
     
     // This calls the submit request function to get park data for the selected state
     submitRequest(searchData);
-    
+    //This calls the get address data function from here-call.js
+    getLatLonAddress(searchData);
     //This checks local storage and adds the search data, overwriting previous data if it exists
     if (localStorage.getItem("searchData") === null) {
         localStorage.setItem('searchData', JSON.stringify(searchData));
@@ -52,7 +53,7 @@ function constructQueryUrl(searchData){
 // It is called at the end of the getFormData function
 function submitRequest(searchData){
     var queryUrl = constructQueryUrl(searchData);
-    
+    console.log("NPS query is firing");
     // This is the fetch request that uses the contructed URL from constructQueryUrl function to call the NPS API
     fetch(queryUrl)
     .then(function(response){
@@ -62,8 +63,9 @@ function submitRequest(searchData){
     })
     .then(function(response){
         // This calls the updateView function, which is defined in update-view.js, and passes it the park data needed to construct the park cards on the results page
-        updateView(response.data);
         console.log(response.data);
+        updateView(response.data);
+        
         
         //This checks local storage and adds the received park data, overwriting previous data if it exists
         if (localStorage.getItem("npsData") === null) {
