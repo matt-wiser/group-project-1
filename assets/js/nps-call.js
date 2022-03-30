@@ -33,12 +33,12 @@ function getFormData(){
     //This calls the get address data function from here-call.js
     // getLatLonAddress(searchData);
     //This checks local storage and adds the search data, overwriting previous data if it exists
-    if (localStorage.getItem("searchData") === null) {
-        localStorage.setItem('searchData', JSON.stringify(searchData));
-    } else {
-       localStorage.removeItem("searchData"); 
-       localStorage.setItem('searchData', JSON.stringify(searchData));
-    }    
+    // if (localStorage.getItem("searchData") === null) {
+    //     localStorage.setItem('searchData', JSON.stringify(searchData));
+    // } else {
+    //    localStorage.removeItem("searchData"); 
+    //    localStorage.setItem('searchData', JSON.stringify(searchData));
+    // }    
 }
 
 
@@ -69,12 +69,12 @@ function submitRequest(searchData){
         getLatLonAddress(searchData, response.data);
         
         //This checks local storage and adds the received park data, overwriting previous data if it exists
-        if (localStorage.getItem("npsData") === null) {
-            localStorage.setItem('npsData', JSON.stringify(response.data));
-        } else {
-           localStorage.removeItem("npsData"); 
-           localStorage.setItem('npsData', JSON.stringify(response.data));
-        }
+        // if (localStorage.getItem("npsData") === null) {
+        //     localStorage.setItem('npsData', JSON.stringify(response.data));
+        // } else {
+        //    localStorage.removeItem("npsData"); 
+        //    localStorage.setItem('npsData', JSON.stringify(response.data));
+        // }
     })
 }
 

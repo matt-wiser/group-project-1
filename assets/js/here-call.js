@@ -20,13 +20,14 @@ function getLatLonAddress(searchData, npsData) {
           var homeLon = "";
           homeLat = data.items[0].position.lat;
           homeLon = data.items[0].position.lng;
-          var parkArray = localStorage.getItem("npsData");
-          parkArray = JSON.parse(parkArray);
           
-          // loop through park information given the home latlon to get route information
-          for (let i = 0; i < parkArray.length; i++) {
-            getSummaryInfo(homeLat, homeLon, npsData[i].latitude, npsData[i].longitude, npsData[i].id);
-          }
+            // loop through park information given the home latlon to get route information
+            for (let i = 0; i < npsData.length; i++) {
+              getSummaryInfo(homeLat, homeLon, npsData[i].latitude, npsData[i].longitude, npsData[i].id);
+            }
+      })
+      .then(function(){
+        addTravelInfo(npsData);
       })
 }
 
@@ -60,7 +61,7 @@ function getSummaryInfo(homeLat, homeLon, lat, lon, id) {
       } else {
        localStorage.removeItem(id); 
        localStorage.setItem(id, JSON.stringify(details));
-      }    
+      }
 
     } else {
       let distance = "No Route Found";

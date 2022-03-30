@@ -62,9 +62,13 @@ label {
     }
 }
 
+/* .card-container a {
+    margin-bottom: 10px !important;
+} */
+
 .operating-hours{
     list-style: none;
-    font-weight: bold;
+    /* font-weight: bold; */
     text-decoration: underline;
 }
 
@@ -76,4 +80,9 @@ label {
 
 .park-link{
     margin-left: 20px;
+}
+
+.distance-time-info{
+    margin: 0px 0px 10px 0px !important;
+    padding: 0px 0px 0px 20px !important;
 }

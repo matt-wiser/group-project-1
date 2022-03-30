@@ -40,38 +40,41 @@ function updateView(npsData){
 }
 
 function addTravelInfo(parkData){
-    
-    for (let i = 0; i < parkData.length; i++) {
-        if (localStorage.getItem(parkData[i].id)) {
-            var travelInfo = localStorage.getItem(parkData[i].id);
-            travelInfo = JSON.parse(travelInfo);
-            console.log(travelInfo);
+    console.log(parkData);
+    for (let i = 0; i < parkData.length; i++) {        
             
-            var travelTimeEl = document.createElement("p");
-            travelTimeEl.textContent = "Estimated Travel Time: " + travelInfo.duration + " Hours";
-    
-            var travelDistanceEl = document.createElement("p");
-            travelDistanceEl.textContent = "Distance from Home: " + travelInfo.distance + " Miles";
-    
-            $(`#${travelInfo.id}`).append(travelTimeEl);
-            $(`#${travelInfo.id}`).append(travelDistanceEl);
-        } else {
+        var travelInfo = localStorage.getItem(parkData[i].id);
+        travelInfo = JSON.parse(travelInfo);
+        
+        if (travelInfo === null) {
             setTimeout(function(){
                 var travelInfo = localStorage.getItem(parkData[i].id);
                 travelInfo = JSON.parse(travelInfo);
-                console.log(travelInfo);
-                
                 var travelTimeEl = document.createElement("p");
+                travelTimeEl.setAttribute("class", "distance-time-info");
                 travelTimeEl.textContent = "Estimated Travel Time: " + travelInfo.duration + " Hours";
         
                 var travelDistanceEl = document.createElement("p");
+                travelDistanceEl.setAttribute("class", "distance-time-info");
                 travelDistanceEl.textContent = "Distance from Home: " + travelInfo.distance + " Miles";
         
                 $(`#${travelInfo.id}`).append(travelTimeEl);
                 $(`#${travelInfo.id}`).append(travelDistanceEl);
-            }, 3000)
+            }, 3200)
+        } else {
+        var travelTimeEl = document.createElement("p");
+        travelTimeEl.setAttribute("class", "distance-time-info");
+        travelTimeEl.textContent = "Estimated Travel Time: " + travelInfo.duration + " Hours";
+
+        var travelDistanceEl = document.createElement("p");
+        travelDistanceEl.setAttribute("class", "distance-time-info");
+        travelDistanceEl.textContent = "Distance from Home: " + travelInfo.distance + " Miles";
+
+        $(`#${travelInfo.id}`).append(travelTimeEl);
+        $(`#${travelInfo.id}`).append(travelDistanceEl);
         }
         
+
 
     }
 }
@@ -281,5 +284,5 @@ function constructParkCards(parkData){
     }
     populateActivities(activitiesArray);
     poplateTopics(topicsArray);
-    addTravelInfo(parkData);
+    // addTravelInfo(parkData);
 }
