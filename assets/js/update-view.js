@@ -73,9 +73,6 @@ function addTravelInfo(parkData){
         $(`#${travelInfo.id}`).append(travelTimeEl);
         $(`#${travelInfo.id}`).append(travelDistanceEl);
         }
-        
-
-
     }
 }
 
