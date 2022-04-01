@@ -1,7 +1,8 @@
-// These are globally defined arrays that will be needed later for populating the filter criteria
-// They are called in the constructParkCards function after all data has been gathered and written to the page
+// These are globally defined arrays that will be needed later for populating the filter criteria and sorting
+// activitiesArray is filled in the populateActivities functions which are called in the constructParkCards function after all data has been gathered and written to the page
+// cardCellArray is filled
 var activitiesArray = [];
-var topicsArray = [];
+var cardCellArray = [];
 
 
 // This is a utility function that removes all child nodes/elements from a chosen element
@@ -76,33 +77,6 @@ function addTravelInfo(parkData){
     }
 }
 
-// This function populates the topics area within the filters panel, it is called in constructParkCards once all data has been collected
-function poplateTopics(array){
-    // This filters out all duplicated topics that occur within the topics array
-    array = [...new Set(array)];
-    
-    // This selects the topics container so that individual entries can be appended
-    var topicContainerEl = document.getElementById("topics-field");
-
-    // This loops through the filtered topics array, constructing checkboxes, labels and a break element before appending them to the page
-    for (let i = 0; i < array.length; i++) {
-        var checkboxLabelEl = document.createElement("label");
-        checkboxLabelEl.setAttribute("for", "checkbox-topic");
-        checkboxLabelEl.textContent = array[i];
-
-        var checkboxEl = document.createElement("input");
-        checkboxEl.setAttribute("type", "checkbox");
-        checkboxEl.setAttribute("id", "checkbox-topic");
-        
-        var breakEl = document.createElement("br");
-
-        topicContainerEl.append(checkboxEl);
-        topicContainerEl.append(checkboxLabelEl);
-        topicContainerEl.append(breakEl);
-        
-    }
-}
-
 // This function populates the activities area within the filters panel, it is called in constructParkCards once all data has been collected
 function populateActivities(array){
     // This filters out all duplicated activities that occur within the activites array
@@ -114,12 +88,14 @@ function populateActivities(array){
     // This loops through the filtered activities array, constructing checkboxes, labels and a break element before appending them to the page
     for (let i = 0; i < array.length; i++) {
         var checkboxLabelEl = document.createElement("label");
-        checkboxLabelEl.setAttribute("for", "checkbox-activity");
+        checkboxLabelEl.setAttribute("for", "checkbox-activity-" + i);
         checkboxLabelEl.textContent = array[i];
 
         var checkboxEl = document.createElement("input");
         checkboxEl.setAttribute("type", "checkbox");
-        checkboxEl.setAttribute("id", "checkbox-activity");
+        checkboxEl.setAttribute("class", "checkbox");
+        checkboxEl.setAttribute("id", "checkbox-activity-" + i);
+        checkboxEl.setAttribute("value", array[i]);
         
         var breakEl = document.createElement("br");
 
@@ -166,25 +142,59 @@ function createOperatingHours(parkData) {
         operatingHours.append(breakEl);
         
         var mondayEl = document.createElement("li");
-        mondayEl.textContent = "Monday: " + parkData.operatingHours[0].standardHours.monday;
+        var mondaySpan = document.createElement("span");
+        mondaySpan.setAttribute("class", "day-span");
+        mondaySpan.textContent = "Monday: "
+        mondayEl.append(mondaySpan);
+        mondayEl.append(parkData.operatingHours[0].standardHours.monday);
         operatingHours.append(mondayEl);
+
         var tuesdayEl = document.createElement("li");
-        tuesdayEl.textContent = "Tuesday: " + parkData.operatingHours[0].standardHours.tuesday;
+        var tuesdaySpan = document.createElement("span");
+        tuesdaySpan.setAttribute("class", "day-span");
+        tuesdaySpan.textContent = "Tuesday: "
+        tuesdayEl.append(tuesdaySpan);
+        tuesdayEl.append(parkData.operatingHours[0].standardHours.tuesday);
         operatingHours.append(tuesdayEl);
+
         var wednesdayEl = document.createElement("li");
-        wednesdayEl.textContent = "Wednesday: " + parkData.operatingHours[0].standardHours.wednesday;
+        var wednesdaySpan = document.createElement("span");
+        wednesdaySpan.setAttribute("class", "day-span");
+        wednesdaySpan.textContent = "Wednesday: "
+        wednesdayEl.append(wednesdaySpan);
+        wednesdayEl.append(parkData.operatingHours[0].standardHours.wednesday);
         operatingHours.append(wednesdayEl);
+
         var thursdayEl = document.createElement("li");
-        thursdayEl.textContent = "Thursday: " + parkData.operatingHours[0].standardHours.thursday;
+        var thursdaySpan = document.createElement("span");
+        thursdaySpan.setAttribute("class", "day-span");
+        thursdaySpan.textContent = "Thursday: "
+        thursdayEl.append(thursdaySpan);
+        thursdayEl.append(parkData.operatingHours[0].standardHours.thursday);
         operatingHours.append(thursdayEl);
+
         var fridayEl = document.createElement("li");
-        fridayEl.textContent = "Friday: " + parkData.operatingHours[0].standardHours.friday;
+        var fridaySpan = document.createElement("span");
+        fridaySpan.setAttribute("class", "day-span");
+        fridaySpan.textContent = "Friday: "
+        fridayEl.append(fridaySpan);
+        fridayEl.append(parkData.operatingHours[0].standardHours.friday);
         operatingHours.append(fridayEl);
+
         var saturdayEl = document.createElement("li");
-        saturdayEl.textContent = "Saturday: " + parkData.operatingHours[0].standardHours.saturday;
+        var saturdaySpan = document.createElement("span");
+        saturdaySpan.setAttribute("class", "day-span");
+        saturdaySpan.textContent = "Saturday: "
+        saturdayEl.append(saturdaySpan);
+        saturdayEl.append(parkData.operatingHours[0].standardHours.saturday);
         operatingHours.append(saturdayEl);
+
         var sundayEl = document.createElement("li");
-        sundayEl.textContent = "Sunday: " + parkData.operatingHours[0].standardHours.sunday;
+        var sundaySpan = document.createElement("span");
+        sundaySpan.setAttribute("class", "day-span");
+        sundaySpan.textContent = "Sunday: "
+        sundayEl.append(sundaySpan);
+        sundayEl.append(parkData.operatingHours[0].standardHours.sunday);
         operatingHours.append(sundayEl);
     
         return operatingHours;
@@ -225,8 +235,8 @@ function createParkUrl(parkData){
 
 // This function constructs all the park cards. It creates a card cell element needed for the Foundation framework, a card element whose style is defined by Foundation, and a card-container element which is a neccessary part of a card element in Foundation
 // It then loops through the array of provided parks, calling each individual element constructor defined early and assigns its returned value to a variable. These elements are then appended to the appropriate area in the card. The card itself is then appended to the page
-// It loops through all of the activities and topics for a given park, adding them to the global actvitiesArray and topicsArray variables
-// Once all cards have been constructed, it then calls the populateActivities and populateTopics functions
+// It loops through all of the activitiesfor a given park, adding them to the global actvitiesArray variable
+// Once all cards have been constructed, it then calls the populateActivities function
 // This function is called at the end of the updateView function after page styles have been updated and the other elements on the page have been removed
 function constructParkCards(parkData){
     var resultsEl = document.getElementById('results-container');
@@ -267,19 +277,55 @@ function constructParkCards(parkData){
         var parkUrlEl = createParkUrl(parkData[i]);
         cardContainerEl.append(parkUrlEl);
 
-        for (let x = 0; x < parkData[i].topics.length; x++) {            
-            cardContainerEl.setAttribute("data-topic" + "-" + [x], parkData[i].topics[x].name);
-            topicsArray.push(parkData[i].topics[x].name);
-        }
-
         for (let y = 0; y < parkData[i].activities.length; y++) {            
-            cardContainerEl.setAttribute("data-activity" + "-" + [y], parkData[i].activities[y].name);
+            cardCellEl.setAttribute("data-activity" + "-" + [y], parkData[i].activities[y].name);
             activitiesArray.push(parkData[i].activities[y].name);
         }
         cardEl.append(cardContainerEl);
         resultsEl.append(cardCellEl);
+        cardCellArray.push(cardCellEl);
     }
     populateActivities(activitiesArray);
-    poplateTopics(topicsArray);
     // addTravelInfo(parkData);
 }
+
+function sortCards(event){
+    var checkedBoxes = $(":checked");
+    var matchingCells = [];
+    console.log(cardCellArray);
+    for (let i = 0; i < checkedBoxes.length; i++) {
+        for (let x = 0; x < cardCellArray.length; x++) {
+            var attributeArray = $.makeArray(cardCellArray[x].attributes);
+            
+            for (let y = 0; y < attributeArray.length; y++) {
+                if (checkedBoxes[i].value === attributeArray[y].value) {
+                    console.log("A match has occured it is for the value " + checkedBoxes[i].value);
+                    // console.log(cardCellArray[x]);
+                    matchingCells.push(cardCellArray[x]);
+                }    
+            }
+        }
+    } populateFilterCells(matchingCells);
+}
+
+function populateFilterCells(array) {
+    var resultsContainerEl = document.getElementById("results-container");
+    removeAllChildNodes(resultsContainerEl);
+    if ($("input:checkbox:checked").length > 0) {
+        for (let i = 0; i < array.length; i++) {
+            resultsContainerEl.append(array[i]);
+        }
+    } else {
+        for (let i = 0; i < cardCellArray.length; i++) {
+            resultsContainerEl.append(cardCellArray[i]);
+        }
+    }
+}
+
+$(document).on('change', '.checkbox', function(event){
+    sortCards(event);
+});
+
+$(document).on('click', '.checkbox', function(event){
+    $('input:checkbox').not(this).prop('checked', false);
+});

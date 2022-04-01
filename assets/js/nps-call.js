@@ -80,3 +80,4 @@ function submitRequest(searchData){
 
 // This function listens for a click event on the submitaddress button and starts the data retreival and API call process when it occurs
 $('#submitaddress').click(getFormData);
+
