@@ -1,7 +1,9 @@
-// These are globally defined arrays that will be needed later for populating the filter criteria
-// They are called in the constructParkCards function after all data has been gathered and written to the page
+// These are globally defined arrays that will be needed later for populating the filter criteria and sorting
+// activitiesArray and topicsArry are filled in the populateTopics and populateActivities functions which are called in the constructParkCards function after all data has been gathered and written to the page
+// cardCellArray is filled
 var activitiesArray = [];
 var topicsArray = [];
+var cardCellArray = [];
 
 
 // This is a utility function that removes all child nodes/elements from a chosen element
@@ -87,12 +89,14 @@ function poplateTopics(array){
     // This loops through the filtered topics array, constructing checkboxes, labels and a break element before appending them to the page
     for (let i = 0; i < array.length; i++) {
         var checkboxLabelEl = document.createElement("label");
-        checkboxLabelEl.setAttribute("for", "checkbox-topic");
+        checkboxLabelEl.setAttribute("for", "checkbox-topic-" + i);
         checkboxLabelEl.textContent = array[i];
 
         var checkboxEl = document.createElement("input");
         checkboxEl.setAttribute("type", "checkbox");
-        checkboxEl.setAttribute("id", "checkbox-topic");
+        checkboxEl.setAttribute("class", "checkbox");
+        checkboxEl.setAttribute("id", "checkbox-topic-" + i);
+        checkboxEl.setAttribute("value", array[i]);
         
         var breakEl = document.createElement("br");
 
@@ -114,12 +118,14 @@ function populateActivities(array){
     // This loops through the filtered activities array, constructing checkboxes, labels and a break element before appending them to the page
     for (let i = 0; i < array.length; i++) {
         var checkboxLabelEl = document.createElement("label");
-        checkboxLabelEl.setAttribute("for", "checkbox-activity");
+        checkboxLabelEl.setAttribute("for", "checkbox-activity-" + i);
         checkboxLabelEl.textContent = array[i];
 
         var checkboxEl = document.createElement("input");
         checkboxEl.setAttribute("type", "checkbox");
-        checkboxEl.setAttribute("id", "checkbox-activity");
+        checkboxEl.setAttribute("class", "checkbox");
+        checkboxEl.setAttribute("id", "checkbox-activity-" + i);
+        checkboxEl.setAttribute("value", array[i]);
         
         var breakEl = document.createElement("br");
 
@@ -301,19 +307,56 @@ function constructParkCards(parkData){
         var parkUrlEl = createParkUrl(parkData[i]);
         cardContainerEl.append(parkUrlEl);
 
-        for (let x = 0; x < parkData[i].topics.length; x++) {            
-            cardContainerEl.setAttribute("data-topic" + "-" + [x], parkData[i].topics[x].name);
-            topicsArray.push(parkData[i].topics[x].name);
-        }
-
         for (let y = 0; y < parkData[i].activities.length; y++) {            
-            cardContainerEl.setAttribute("data-activity" + "-" + [y], parkData[i].activities[y].name);
+            cardCellEl.setAttribute("data-activity" + "-" + [y], parkData[i].activities[y].name);
             activitiesArray.push(parkData[i].activities[y].name);
         }
         cardEl.append(cardContainerEl);
         resultsEl.append(cardCellEl);
+        cardCellArray.push(cardCellEl);
     }
     populateActivities(activitiesArray);
-    poplateTopics(topicsArray);
     // addTravelInfo(parkData);
 }
+
+function sortCards(event){
+    var checkedBoxes = $(":checked");
+    var matchingCells = [];
+    console.log(cardCellArray);
+    for (let i = 0; i < checkedBoxes.length; i++) {
+        for (let x = 0; x < cardCellArray.length; x++) {
+            var attributeArray = $.makeArray(cardCellArray[x].attributes);
+            
+            for (let y = 0; y < attributeArray.length; y++) {
+                if (checkedBoxes[i].value === attributeArray[y].value) {
+                    console.log("A match has occured it is for the value " + checkedBoxes[i].value);
+                    // console.log(cardCellArray[x]);
+                    matchingCells.push(cardCellArray[x]);
+                }    
+            }
+        }
+    } populateFilterCells(matchingCells);
+}
+
+function populateFilterCells(array) {
+    var resultsContainerEl = document.getElementById("results-container");
+    removeAllChildNodes(resultsContainerEl);
+    if ($("input:checkbox:checked").length > 0) {
+        for (let i = 0; i < array.length; i++) {
+            resultsContainerEl.append(array[i]);
+        }
+    } else {
+        for (let i = 0; i < cardCellArray.length; i++) {
+            resultsContainerEl.append(cardCellArray[i]);
+            
+        }
+    }
+}
+
+$(document).on('change', '.checkbox', function(event){
+    sortCards(event);
+});
+
+$(document).on('click', '.checkbox', function(event){
+    $('input:checkbox').not(this).prop('checked', false);
+});
