@@ -166,25 +166,59 @@ function createOperatingHours(parkData) {
         operatingHours.append(breakEl);
         
         var mondayEl = document.createElement("li");
-        mondayEl.textContent = "Monday: " + parkData.operatingHours[0].standardHours.monday;
+        var mondaySpan = document.createElement("span");
+        mondaySpan.setAttribute("class", "day-span");
+        mondaySpan.textContent = "Monday: "
+        mondayEl.append(mondaySpan);
+        mondayEl.append(parkData.operatingHours[0].standardHours.monday);
         operatingHours.append(mondayEl);
+
         var tuesdayEl = document.createElement("li");
-        tuesdayEl.textContent = "Tuesday: " + parkData.operatingHours[0].standardHours.tuesday;
+        var tuesdaySpan = document.createElement("span");
+        tuesdaySpan.setAttribute("class", "day-span");
+        tuesdaySpan.textContent = "Tuesday: "
+        tuesdayEl.append(tuesdaySpan);
+        tuesdayEl.append(parkData.operatingHours[0].standardHours.tuesday);
         operatingHours.append(tuesdayEl);
+
         var wednesdayEl = document.createElement("li");
-        wednesdayEl.textContent = "Wednesday: " + parkData.operatingHours[0].standardHours.wednesday;
+        var wednesdaySpan = document.createElement("span");
+        wednesdaySpan.setAttribute("class", "day-span");
+        wednesdaySpan.textContent = "Wednesday: "
+        wednesdayEl.append(wednesdaySpan);
+        wednesdayEl.append(parkData.operatingHours[0].standardHours.wednesday);
         operatingHours.append(wednesdayEl);
+
         var thursdayEl = document.createElement("li");
-        thursdayEl.textContent = "Thursday: " + parkData.operatingHours[0].standardHours.thursday;
+        var thursdaySpan = document.createElement("span");
+        thursdaySpan.setAttribute("class", "day-span");
+        thursdaySpan.textContent = "Thursday: "
+        thursdayEl.append(thursdaySpan);
+        thursdayEl.append(parkData.operatingHours[0].standardHours.thursday);
         operatingHours.append(thursdayEl);
+
         var fridayEl = document.createElement("li");
-        fridayEl.textContent = "Friday: " + parkData.operatingHours[0].standardHours.friday;
+        var fridaySpan = document.createElement("span");
+        fridaySpan.setAttribute("class", "day-span");
+        fridaySpan.textContent = "Friday: "
+        fridayEl.append(fridaySpan);
+        fridayEl.append(parkData.operatingHours[0].standardHours.friday);
         operatingHours.append(fridayEl);
+
         var saturdayEl = document.createElement("li");
-        saturdayEl.textContent = "Saturday: " + parkData.operatingHours[0].standardHours.saturday;
+        var saturdaySpan = document.createElement("span");
+        saturdaySpan.setAttribute("class", "day-span");
+        saturdaySpan.textContent = "Saturday: "
+        saturdayEl.append(saturdaySpan);
+        saturdayEl.append(parkData.operatingHours[0].standardHours.saturday);
         operatingHours.append(saturdayEl);
+
         var sundayEl = document.createElement("li");
-        sundayEl.textContent = "Sunday: " + parkData.operatingHours[0].standardHours.sunday;
+        var sundaySpan = document.createElement("span");
+        sundaySpan.setAttribute("class", "day-span");
+        sundaySpan.textContent = "Sunday: "
+        sundayEl.append(sundaySpan);
+        sundayEl.append(parkData.operatingHours[0].standardHours.sunday);
         operatingHours.append(sundayEl);
     
         return operatingHours;

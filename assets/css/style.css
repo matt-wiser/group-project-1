@@ -22,8 +22,24 @@ label {
     margin-bottom: 10px;
 }
 
+#street-address, #intro-header{
+    margin-top: 10px;
+}
+
+.button{
+    background-color: #146129;
+}
+
+.button:hover {
+    background-color: #1d913c;
+}
+
 .card {
     padding-bottom: 15px;
+}
+
+.card-divider {
+    background-color: #a8bdad;
 }
 
 .card h5{
@@ -72,6 +88,10 @@ label {
     display: inline-block;
     margin-right: 5px;
     text-decoration: none;
+}
+
+.day-span{
+    font-weight: bold;
 }
 
 .park-link{
