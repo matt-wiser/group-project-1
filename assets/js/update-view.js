@@ -1,8 +1,7 @@
 // These are globally defined arrays that will be needed later for populating the filter criteria and sorting
-// activitiesArray and topicsArry are filled in the populateTopics and populateActivities functions which are called in the constructParkCards function after all data has been gathered and written to the page
+// activitiesArray is filled in the populateActivities functions which are called in the constructParkCards function after all data has been gathered and written to the page
 // cardCellArray is filled
 var activitiesArray = [];
-var topicsArray = [];
 var cardCellArray = [];
 
 
@@ -75,35 +74,6 @@ function addTravelInfo(parkData){
         $(`#${travelInfo.id}`).append(travelTimeEl);
         $(`#${travelInfo.id}`).append(travelDistanceEl);
         }
-    }
-}
-
-// This function populates the topics area within the filters panel, it is called in constructParkCards once all data has been collected
-function poplateTopics(array){
-    // This filters out all duplicated topics that occur within the topics array
-    array = [...new Set(array)];
-    
-    // This selects the topics container so that individual entries can be appended
-    var topicContainerEl = document.getElementById("topics-field");
-
-    // This loops through the filtered topics array, constructing checkboxes, labels and a break element before appending them to the page
-    for (let i = 0; i < array.length; i++) {
-        var checkboxLabelEl = document.createElement("label");
-        checkboxLabelEl.setAttribute("for", "checkbox-topic-" + i);
-        checkboxLabelEl.textContent = array[i];
-
-        var checkboxEl = document.createElement("input");
-        checkboxEl.setAttribute("type", "checkbox");
-        checkboxEl.setAttribute("class", "checkbox");
-        checkboxEl.setAttribute("id", "checkbox-topic-" + i);
-        checkboxEl.setAttribute("value", array[i]);
-        
-        var breakEl = document.createElement("br");
-
-        topicContainerEl.append(checkboxEl);
-        topicContainerEl.append(checkboxLabelEl);
-        topicContainerEl.append(breakEl);
-        
     }
 }
 
@@ -265,8 +235,8 @@ function createParkUrl(parkData){
 
 // This function constructs all the park cards. It creates a card cell element needed for the Foundation framework, a card element whose style is defined by Foundation, and a card-container element which is a neccessary part of a card element in Foundation
 // It then loops through the array of provided parks, calling each individual element constructor defined early and assigns its returned value to a variable. These elements are then appended to the appropriate area in the card. The card itself is then appended to the page
-// It loops through all of the activities and topics for a given park, adding them to the global actvitiesArray and topicsArray variables
-// Once all cards have been constructed, it then calls the populateActivities and populateTopics functions
+// It loops through all of the activitiesfor a given park, adding them to the global actvitiesArray variable
+// Once all cards have been constructed, it then calls the populateActivities function
 // This function is called at the end of the updateView function after page styles have been updated and the other elements on the page have been removed
 function constructParkCards(parkData){
     var resultsEl = document.getElementById('results-container');
@@ -348,7 +318,6 @@ function populateFilterCells(array) {
     } else {
         for (let i = 0; i < cardCellArray.length; i++) {
             resultsContainerEl.append(cardCellArray[i]);
-            
         }
     }
 }
