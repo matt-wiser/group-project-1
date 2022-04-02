@@ -40,15 +40,17 @@ function updateView(npsData){
     constructParkCards(npsData);
 }
 
+
+
 function addTravelInfo(parkData){
     console.log(parkData);
     for (let i = 0; i < parkData.length; i++) {        
             
         var travelInfo = localStorage.getItem(parkData[i].id);
         travelInfo = JSON.parse(travelInfo);
-        
+
         if (travelInfo === null) {
-            setTimeout(function(){
+            // setTimeout(function(){
                 var travelInfo = localStorage.getItem(parkData[i].id);
                 travelInfo = JSON.parse(travelInfo);
                 var travelTimeEl = document.createElement("p");
@@ -61,18 +63,18 @@ function addTravelInfo(parkData){
         
                 $(`#${travelInfo.id}`).append(travelTimeEl);
                 $(`#${travelInfo.id}`).append(travelDistanceEl);
-            }, 3200)
+            // }, 3200)
         } else {
-        var travelTimeEl = document.createElement("p");
-        travelTimeEl.setAttribute("class", "distance-time-info");
-        travelTimeEl.textContent = "Estimated Travel Time: " + travelInfo.duration + " Hours";
+            var travelTimeEl = document.createElement("p");
+            travelTimeEl.setAttribute("class", "distance-time-info");
+            travelTimeEl.textContent = "Estimated Travel Time: " + travelInfo.duration + " Hours";
 
-        var travelDistanceEl = document.createElement("p");
-        travelDistanceEl.setAttribute("class", "distance-time-info");
-        travelDistanceEl.textContent = "Distance from Home: " + travelInfo.distance + " Miles";
+            var travelDistanceEl = document.createElement("p");
+            travelDistanceEl.setAttribute("class", "distance-time-info");
+            travelDistanceEl.textContent = "Distance from Home: " + travelInfo.distance + " Miles";
 
-        $(`#${travelInfo.id}`).append(travelTimeEl);
-        $(`#${travelInfo.id}`).append(travelDistanceEl);
+            $(`#${travelInfo.id}`).append(travelTimeEl);
+            $(`#${travelInfo.id}`).append(travelDistanceEl);
         }
     }
 }
@@ -286,13 +288,12 @@ function constructParkCards(parkData){
         cardCellArray.push(cardCellEl);
     }
     populateActivities(activitiesArray);
-    // addTravelInfo(parkData);
 }
 
 function sortCards(event){
     var checkedBoxes = $(":checked");
     var matchingCells = [];
-    console.log(cardCellArray);
+
     for (let i = 0; i < checkedBoxes.length; i++) {
         for (let x = 0; x < cardCellArray.length; x++) {
             var attributeArray = $.makeArray(cardCellArray[x].attributes);

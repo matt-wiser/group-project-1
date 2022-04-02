@@ -6,78 +6,58 @@ $(document).foundation();
 function getFormData(){
     //This pulls the selected state value and adds it to a variable
     var selectedState = document.getElementById('state-select');
-    selectedState = selectedState.value;
+    var selectedStateValue = selectedState.value;
 
     //This pulls the street address value and adds it to a variable
     var streetAddress = document.getElementById('address');
-    streetAddress = streetAddress.value.trim().replace(/ /g, "_");
+    var streetAddressValue = streetAddress.value.trim().replace(/ /g, "_");
 
     //This pulls the city value and adds it to a variable
     var city = document.getElementById('city');
-    city = city.value.trim().replace(/ /g, "_");
+    var cityValue = city.value.trim().replace(/ /g, "_");
 
     //This pulls the zip code value and adds it to a variable
     var zipCode = document.getElementById('zip');
-    zipCode = zipCode.value.trim().replace(/ /g, "_");
+    var zipCodeValue = zipCode.value.trim().replace(/ /g, "_");
 
     //This creates an object that contains all user furnished search information using the previously created variables
     var searchData = {
-        selectedState: selectedState,
-        streetAddress: streetAddress,
-        city: city,
-        zipCode: zipCode,
+        selectedStateValue,
+        streetAddressValue,
+        cityValue,
+        zipCodeValue,
     }
     
     // This calls the submit request function to get park data for the selected state
-    submitRequest(searchData);
-    //This calls the get address data function from here-call.js
-    // getLatLonAddress(searchData);
-    //This checks local storage and adds the search data, overwriting previous data if it exists
-    // if (localStorage.getItem("searchData") === null) {
-    //     localStorage.setItem('searchData', JSON.stringify(searchData));
-    // } else {
-    //    localStorage.removeItem("searchData"); 
-    //    localStorage.setItem('searchData', JSON.stringify(searchData));
-    // }    
+    
+    // submitRequest(searchData);
+    return searchData;
 }
 
+async function main() {
+    var formData = getFormData();
 
-// This takes the search data object and creates a query string that the API can read.
-// It is called in the submit request function
-function constructQueryUrl(searchData){
-    var queryUrl = npsUrl + '&stateCode=' + searchData.selectedState;
-    return queryUrl;
-}
+    const response = await fetch(`${npsUrl}&stateCode=${formData.selectedStateValue}`)
+    const {data: npsData} = await response.json();
 
-// This submits the resuest for information from the NPS API using the user inputted search data
-// It is called at the end of the getFormData function
-function submitRequest(searchData){
-    var queryUrl = constructQueryUrl(searchData);
-    console.log("NPS query is firing");
-    // This is the fetch request that uses the contructed URL from constructQueryUrl function to call the NPS API
-    fetch(queryUrl)
-    .then(function(response){
-        // This receives the API response, turns it into a readable JSON format, and passes it to the next then() function
-        response = response.json();
-        return response;
-    })
-    .then(function(response){
-        // This calls the updateView function, which is defined in update-view.js, and passes it the park data needed to construct the park cards on the results page
-        console.log(response.data);
-        localStorage.setItem('npsData', JSON.stringify(response.data));
-        updateView(response.data);
-        getLatLonAddress(searchData, response.data);
+    updateView(npsData);
         
-        //This checks local storage and adds the received park data, overwriting previous data if it exists
-        // if (localStorage.getItem("npsData") === null) {
-        //     localStorage.setItem('npsData', JSON.stringify(response.data));
-        // } else {
-        //    localStorage.removeItem("npsData"); 
-        //    localStorage.setItem('npsData', JSON.stringify(response.data));
-        // }
-    })
+    var homeLatLng = await getLatLonAddress(formData);
+    var summaryPromiseArray = [];
+
+    npsData.forEach(park => {
+        const summary = getSummaryInfo(homeLatLng.lat, homeLatLng.lng, park.latitude, park.longitude, park.id)
+        summaryPromiseArray.push(summary);
+    });
+    const summaryDataArray = await Promise.all(summaryPromiseArray);
+    
+    for (const summary of summaryDataArray) {
+        localStorage.setItem(`${summary.id}`, JSON.stringify(summary));
+    }
+
+    addTravelInfo(npsData);
 }
 
 // This function listens for a click event on the submitaddress button and starts the data retreival and API call process when it occurs
-$('#submitaddress').click(getFormData);
+$('#submitaddress').click(main);
 
