@@ -120,6 +120,7 @@ async function getSummaryInfo(homeLat, homeLon, lat, lon, id) {
     var hereCallSummaryUrl = `https://router.hereapi.com/v8/routes?transportMode=car&origin=${homeLat},${homeLon}&destination=${lat},${lon}&return=summary&apikey=aFbhWRKzG5oEgwGqW5qoKpwXmPJFS3pmFAlVLFL0cok`
     const response = await fetch(hereCallSummaryUrl);
     const data = await response.json();
+    
     if (data.routes[0]) {
       let duration = (data.routes[0].sections[0].summary.baseDuration/3600).toFixed(2);
       let distance = (data.routes[0].sections[0].summary.length/1609.34).toFixed(2); 
